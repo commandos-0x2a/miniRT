@@ -13,6 +13,12 @@
 
 static mlx_image_t* image;
 
+typedef struct	s_2d_point
+{
+	int32_t		x;
+	int32_t		y;
+}				t_2d_point;
+
 
 // -----------------------------------------------------------------------------
 
@@ -41,6 +47,10 @@ void ft_randomize(void* param)
 
 void ft_hook(void* param)
 {
+	static t_2d_point old;
+	t_2d_point mpos;
+	t_2d_point ipos;
+	t_2d_point delta;
 	mlx_t* mlx = param;
 
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
@@ -53,6 +63,22 @@ void ft_hook(void* param)
 		image->instances[0].x -= 5;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		image->instances[0].x += 5;
+	
+	mlx_get_mouse_pos(mlx, &mpos.x, &mpos.y);
+	if (mlx_is_mouse_down(mlx, MLX_MOUSE_BUTTON_LEFT))
+	{
+		ipos.x = image->instances[0].x;
+		ipos.y = image->instances[0].y;
+		delta.x = old.x - mpos.x;
+		delta.y = old.y - mpos.y;
+		if (mpos.x >= ipos.x && mpos.x <= ipos.x + (int32_t)image->width &&
+			mpos.y >= ipos.y && mpos.y <= ipos.y + (int32_t)image->height)
+		{
+			image->instances[0].x -=  delta.x; //(offset.x - mpos.x) - image->width / 2;
+			image->instances[0].y -= delta.y; //(offset.y - mpos.y) - image->height / 2;
+		}
+	}
+	old = mpos;
 }
 
 // -----------------------------------------------------------------------------
