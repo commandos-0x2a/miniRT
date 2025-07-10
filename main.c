@@ -6,9 +6,15 @@
 
 int	main()
 {
-	t_cube	*cube;
+	t_cube		*cube;
+	t_camera	camera;
 
-	cube = cube_create((t_vector3){10, 10, 0}, (t_vector3){0});
+	object_constructor(&camera);
+
+	camera.obj.pos.x = 10;
+	camera.fov = 60.0f;
+
+	cube = cube_create((t_vector3){0, 0, 0}, (t_vector3){0});
 
 	draw(cube, NULL, NULL);
 

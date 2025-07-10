@@ -7,7 +7,6 @@ typedef struct s_camera
 {
 	t_object obj;
 	float fov;
-	float aspect_ratio;
 }	t_camera;
 
 #endif // CAMERA_H
