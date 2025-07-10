@@ -3,6 +3,25 @@
 #include <stdio.h>
 #include <string.h>
 
+static void set_vertices(vertex_t vertices[8])
+{
+    vertices[0] = (vertex_t){ 1, 1, 1, 0, 0, 0};
+    vertices[1] = (vertex_t){ 1,-1, 1, 0, 0, 0};
+    vertices[2] = (vertex_t){-1,-1, 1, 0, 0, 0};
+    vertices[3] = (vertex_t){-1, 1, 1, 0, 0, 0};
+    vertices[4] = (vertex_t){ 1, 1,-1, 0, 0, 0};
+    vertices[5] = (vertex_t){ 1,-1,-1, 0, 0, 0};
+    vertices[6] = (vertex_t){-1,-1,-1, 0, 0, 0};
+    vertices[7] = (vertex_t){-1, 1,-1, 0, 0, 0};
+}
+
+static void set_indices(unsigned int indices[12 * 3])
+{
+    indices = (unsigned int[12 * 3]){
+        
+    }
+}
+
 t_cube* cube_create(t_vector3 pos, t_vector3 rotation)
 {
     t_cube  *cube;
