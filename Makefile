@@ -2,7 +2,7 @@ NAME = miniRT
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -O2
-CPPFLAGS = -IMLX42/include
+CPPFLAGS = -IMLX42/include -Iobject
 LDFLAGS =  -lmlx42 -lglfw -lm -Lbuild
 
 UNAME_S := $(shell uname -s)
@@ -12,7 +12,11 @@ else ifeq ($(UNAME_S), Darwin)
 	LDFLAGS += -L"/opt/homebrew/Cellar/glfw/3.4/lib"
 endif
 
-SRC = main.c
+SRC = main.c \
+	object/object.c \
+	object/cube.c \
+	object/geometric.c \
+	# object/camera.c
 OBJ = $(SRC:%.c=build/%.o)
 
 all: MLX42 $(NAME)
@@ -25,6 +29,7 @@ $(NAME): $(OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 build/%.o: %.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 clean:
