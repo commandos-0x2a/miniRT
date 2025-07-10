@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cube.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/10 23:17:40 by yaltayeh          #+#    #+#             */
+/*   Updated: 2025/07/10 23:30:17 by yaltayeh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -15,9 +27,9 @@ static void set_vertices(vertex_t *vertices)
 	vertices[7] = (vertex_t){1, -1, -1, 0, 0, 0};
 }
 
-static void set_indices(unsigned int *indices, size_t count)
+static void set_indices(GLuint *indices, size_t count)
 {
-	memcpy(indices, (unsigned int *){
+	memcpy(indices, (GLuint [36]){
 						0, 1, 2, // top
 						2, 3, 0, // top
 						4, 5, 6, // down
@@ -30,7 +42,7 @@ static void set_indices(unsigned int *indices, size_t count)
 						5, 6, 2, // sur down
 						6, 7, 3, // sur down
 						7, 4, 0	 // sur down
-					}, count * sizeof(int));
+					}, count * sizeof(GLuint));
 }
 
 t_cube *cube_create(t_vector3 pos, t_vector3 rotation)

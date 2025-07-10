@@ -10,6 +10,7 @@ ifeq ($(UNAME_S), Linux)
 	LDFLAGS += -ldl -pthread 
 else ifeq ($(UNAME_S), Darwin)
 	LDFLAGS += -L"/opt/homebrew/Cellar/glfw/3.4/lib"
+	CPPFLAGS += -I"/opt/homebrew/Cellar/glfw/3.4/include"
 endif
 
 SRC = main.c \
