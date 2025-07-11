@@ -6,7 +6,7 @@
 /*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:17:54 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/10 23:29:47 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/11 11:39:22 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@
 typedef struct s_geometric
 {
 	t_object obj;
+	mlx_image_t		*texture;
 	vertex_t		*vertices;
 	unsigned int	vertices_count;
-	unsigned int	*indices;
+	GLuint			*indices;
 	unsigned int	indices_count;
 } t_geometric;
 

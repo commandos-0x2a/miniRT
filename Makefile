@@ -1,9 +1,13 @@
 NAME = miniRT
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O2
+CFLAGS = -Wall -Wextra -Werror -g
 CPPFLAGS = -IMLX42/include -Iobject
 LDFLAGS =  -lmlx42 -lglfw -lm -Lbuild
+
+ifeq ($(DEBUG), 1)
+	CFLAGS += -DDEBUG
+endif
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
@@ -13,11 +17,13 @@ else ifeq ($(UNAME_S), Darwin)
 	CPPFLAGS += -I"/opt/homebrew/Cellar/glfw/3.4/include"
 endif
 
-SRC = main.c \
-	object/object.c \
-	object/cube.c \
-	object/geometric.c \
-	# object/camera.c
+SRC = main.c			\
+	object/object.c		\
+	object/cube.c		\
+	object/geometric.c	\
+	object/camera.c		\
+	object/drawing.c	\
+
 OBJ = $(SRC:%.c=build/%.o)
 
 all: MLX42 $(NAME)
@@ -31,7 +37,7 @@ $(NAME): $(OBJ)
 
 build/%.o: %.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS)  -c $< -o $@
 
 clean:
 	rm -f $(OBJ) $(NAME)
