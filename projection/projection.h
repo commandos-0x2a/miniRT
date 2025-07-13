@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube.h                                             :+:      :+:    :+:   */
+/*   projection.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/10 23:17:51 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/13 17:00:30 by rsrour           ###   ########.fr       */
+/*   Created: 2025/07/13 14:40:38 by rsrour            #+#    #+#             */
+/*   Updated: 2025/07/13 17:20:10 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE_H
-#define CUBE_H
+#ifndef PROJECTION_H
+# define PROJECTION_H
 
-<<<<<<< HEAD
-#include "model.h"
-=======
-#include "geometric.h"
-#include "../projection/projection.h"
->>>>>>> refs/remotes/origin/master
+# include "../object/camera.h"
+# include "../object/components.h"
+# include "../object/cube.h"
+# include "../object/drawing.h"
+# include "../object/geometric.h"
+# include "../object/object.h"
 
-typedef struct s_cube
-{
-	t_model		model;
-	vertex_t	vertices[8];
-	GLuint		indices[12 * 3];
-}	t_cube;
+# include <MLX42/MLX42.h>
+# include <math.h>
 
-t_cube	*init_cube(t_vector3 pos, t_vector3 rotation, mlx_image_t *texture);
+// void project_cube(mlx_t *mlx, t_cube *cube, t_camera *camera);
 
-#endif // CUBE_H
+#endif
