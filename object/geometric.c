@@ -60,7 +60,7 @@ void	draw_geometric(mlx_t *mlx, t_geometric *geo,
 }
 */
 
-void	draw_geometric(mlx_t *mlx, t_geometric *geo, t_camera *camera) // frame inside camera
+void	ft_draw_geometric(mlx_t *mlx, t_geometric *geo, t_camera *camera) // frame inside camera
 {
 	(void)mlx; (void)geo; (void)camera;
 #ifdef DEBUG
@@ -88,9 +88,13 @@ void	draw_geometric(mlx_t *mlx, t_geometric *geo, t_camera *camera) // frame ins
 	}
 #endif
 
-	draw_circle(camera->frame, 50, 49, 50, 0xff0000ff);
-	// write draw code here
-	
+
+}
+
+
+void	gl_draw_geometric(mlx_t *mlx, t_geometric *geo, t_camera *camera)
+{
+
 }
 
 void	geometric_constructor(void *_geo, 
