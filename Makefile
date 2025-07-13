@@ -31,7 +31,7 @@ OBJ = $(SRC:%.c=build/%.o)
 all: MLX42 $(NAME)
 
 MLX42:
-	cmake -S MLX42 -B build
+	cmake -S MLX42 -B build -Wno-dev
 	cmake --build build -j4
 
 $(NAME): $(OBJ)
