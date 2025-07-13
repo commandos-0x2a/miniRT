@@ -17,14 +17,14 @@ else ifeq ($(UNAME_S), Darwin)
 	CPPFLAGS += -I"/opt/homebrew/Cellar/glfw/3.4/include"
 endif
 
-SRC = main.c				\
-	object/object.c			\
-	object/cube.c			\
-	object/geometric.c		\
-	object/camera.c			\
-	object/drawing.c		\
-	projection/projection.c	\
-	projection/main.c 		\
+SRC = main.c							\
+	object/object.c						\
+	object/cube.c						\
+	object/geometric.c					\
+	object/camera.c						\
+	object/drawing.c					\
+	projection/projection.c				\
+	projection/test_projection.c 		\
 
 OBJ = $(SRC:%.c=build/%.o)
 

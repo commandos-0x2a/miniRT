@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:17:51 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/11 08:57:18 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/13 17:00:30 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define CUBE_H
 
 #include "geometric.h"
+#include "../projection/projection.h"
 
 typedef struct s_cube
 {

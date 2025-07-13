@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 14:40:38 by rsrour            #+#    #+#             */
-/*   Updated: 2025/07/13 14:45:58 by rsrour           ###   ########.fr       */
+/*   Updated: 2025/07/13 17:20:10 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@
 
 # include <MLX42/MLX42.h>
 # include <math.h>
+
+// void project_cube(mlx_t *mlx, t_cube *cube, t_camera *camera);
 
 #endif

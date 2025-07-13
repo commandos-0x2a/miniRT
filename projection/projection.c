@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 14:46:38 by rsrour            #+#    #+#             */
-/*   Updated: 2025/07/13 15:45:52 by rsrour           ###   ########.fr       */
+/*   Updated: 2025/07/13 17:20:01 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,3 +33,14 @@ and then we build the camera and the cube around the projection logic.
 How long can Yacoub wait for me to finish this? I don't know, 
 but I will try to do it.
 */
+
+// void project_cube(mlx_t *mlx, t_cube *cube, t_camera *camera)
+// {
+//     // This function will project the cube onto the camera's frame
+//     // For now, we will just draw the cube on the camera's frame
+//     // In the future, we will implement the projection logic
+//     // if (cube && camera)
+//     // {
+//     //     draw(mlx, &cube->geo.obj, camera);
+//     // }
+// }
