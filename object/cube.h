@@ -13,11 +13,11 @@
 #ifndef CUBE_H
 #define CUBE_H
 
-#include "geometric.h"
+#include "model.h"
 
 typedef struct s_cube
 {
-	t_geometric	geo;
+	t_model		model;
 	vertex_t	vertices[8];
 	GLuint		indices[12 * 3];
 }	t_cube;

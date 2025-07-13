@@ -1,21 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   geometric.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/10 23:17:54 by yaltayeh          #+#    #+#             */
+/*   Updated: 2025/07/13 17:26:35 by yaltayeh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MODEL_H
 #define MODEL_H
 
-#include <MLX42/MLX42.h>
+#include <math.h>
 #include <MLX42/MLX42_Int.h>
+#include "object.h"
+#include "mesh.h"
 
-# define RESERVED_SIZE 32
-
-typedef struct s_model {
-	unsigned char	magic[4]; // Magic number to identify the file format
-	unsigned int	version;   // Version of the file format
-	unsigned int	vertex_count; // Number of vertices in the model
-	unsigned int	index_count;  // Number of indices in the model
-	unsigned int	uv_size; // Size of UV data
-	unsigned char	reserved[RESERVED_SIZE]; // Reserved for future use
-	vertex_t 		*vertices; // Pointer to an array of vertex data
-	unsigned int	*indices;  // Pointer to an array of index data
-	mlx_image_t		*texture; // Pointer to the texture image
+typedef struct s_model
+{
+	t_object	obj;
+	t_mesh		mesh;
 } t_model;
 
-#endif	// MODEL_H
+void	model_constructor(void *_mod, 
+		vertex_t *vertices, GLuint *indices);
+
+#endif // MODEL_H

@@ -52,17 +52,17 @@ t_cube *init_cube(t_vector3 pos, t_vector3 rotation, mlx_image_t *texture)
 	cube = calloc(1, sizeof(*cube));
 	if (!cube)
 		return (NULL);
-	geometric_constructor(cube, cube->vertices, cube->indices);
-	cube->geo.obj.pos = pos;
-	cube->geo.obj.rotation = rotation;
-	cube->geo.texture = texture;
-	cube->geo.vertices_count =
+	model_constructor(cube, cube->vertices, cube->indices);
+	cube->model.obj.pos = pos;
+	cube->model.obj.rotation = rotation;
+	cube->model.mesh.texture = texture;
+	cube->model.mesh.vertex_count =
 	sizeof(cube->vertices) / sizeof(cube->vertices[0]);
-	cube->geo.indices_count =
+	cube->model.mesh.index_count =
 	sizeof(cube->indices) / sizeof(cube->indices[0]);
 	memset(cube->vertices, 0, sizeof(cube->vertices));
 	memset(cube->indices, 0, sizeof(cube->indices));
 	set_vertices(cube->vertices);
-	set_indices(cube->indices, cube->geo.indices_count);
+	set_indices(cube->indices, cube->model.mesh.index_count);
 	return (cube);
 }

@@ -20,9 +20,10 @@ endif
 SRC = main.c			\
 	object/object.c		\
 	object/cube.c		\
-	object/geometric.c	\
+	object/mesh.c		\
 	object/camera.c		\
 	object/drawing.c	\
+	object/model.c		\
 
 OBJ = $(SRC:%.c=build/%.o)
 

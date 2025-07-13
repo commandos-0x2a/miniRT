@@ -1,29 +1,113 @@
 #include "model.h"
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdio.h>
-#include <stddef.h>
+#include "camera.h"
+#include <math.h>
+#include "drawing.h"
 
-// mlx_image_t *ft_read_texture_date(int fd, t_model *model)
+// test draw with opneGL (not work)
+/*
+int8_t mlx_bind_texture(mlx_ctx_t* mlx, mlx_image_t* img);
+
+void	draw_geometric(mlx_t *mlx, t_geometric *geo, 
+			mlx_image_t *frame, t_camera *camera)
+{
+	(void)frame; (void)camera; (void)geo;
+	mlx_ctx_t* mlxctx = mlx->context;
+	mlx_list_t* imglst = mlxctx->images;
+
+	// Upload image textures to GPU
+	while (imglst)
+	{
+		mlx_image_t* image;
+		if (!(image = imglst->content)) {
+			mlx_error(MLX_INVIMG);
+			return;
+		}
+
+		glBindTexture(GL_TEXTURE_2D, ((mlx_image_ctx_t*)image->context)->texture);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->width, image->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels);
+		imglst = imglst->next;
+	}
+
+	// Execute draw calls
+	int8_t tex = 0; //mlx_bind_texture(mlxctx, geo->texture);
+
+	vertex_t *vertices = malloc(geo->vertices_count * sizeof(vertex_t));
+	if (!vertices)
+		return ;
+	float	uv[3][2] = {
+		{0.0f, 0.0f},
+		{1.0f, 0.0f},
+		{0.0f, 1.0f}
+	};
+	for (unsigned int i = 0; i < geo->vertices_count; i++)
+	{
+		vertices[i] = (vertex_t){
+			fmaxf(geo->vertices[i].x * 100.f + 300.f, 0.f),
+			fmaxf(geo->vertices[i].y * 100.f + 300.f, 0.f),
+			0,
+			uv[i % 3][0],
+			uv[i % 3][1],
+			tex
+		};
+	}
+	memmove(mlxctx->batch_vertices + mlxctx->batch_size,
+		vertices, geo->vertices_count * sizeof(vertex_t));
+	free(vertices);
+	mlxctx->batch_size += geo->vertices_count;
+
+	if (mlxctx->batch_size >= MLX_BATCH_SIZE)
+		mlx_flush_batch(mlxctx);
+}
+*/
+
+void	ft_draw_model(mlx_t *mlx, t_model *geo, t_camera *camera) // frame inside camera
+{
+	(void)mlx; (void)geo; (void)camera;
+#ifdef DEBUG
+	printf("mlx: %p, goe: %p, camera: %p\n", mlx, geo, camera);
+	printf("vertices: %u\n", geo->vertices_count);
+	for (uint32_t i = 0; i < geo->vertices_count; i++)
+	{
+		printf("\tx:% 2f y:% 2f z:% 2f u:% 2f v:% 2f tex:%hhd\n",
+			geo->vertices[i].x,
+			geo->vertices[i].y,
+			geo->vertices[i].z,
+			geo->vertices[i].u,
+			geo->vertices[i].v,
+			geo->vertices[i].tex
+		);
+	}
+	printf("\nindices: %u\n", geo->indices_count);
+	for (uint32_t i = 0; i < geo->indices_count; i+=3)
+	{
+		printf("\t%u, %u, %u\n", 
+			geo->indices[i],
+			geo->indices[i + 1],
+			geo->indices[i + 2]
+		);
+	}
+#endif
+
+
+}
+
+
+// void	gl_draw_model(mlx_t *mlx, t_model *geo, t_camera *camera)
 // {
-// 	//fill later
+
 // }
 
-t_model	*load_model(const char *filename)
+void	model_constructor(void *_model, 
+		vertex_t *vertices, GLuint *indices)
 {
-	int		fd;
-	t_model	model;
+	t_model	*model;
 
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-	{
-		perror(filename);
-		return (NULL);
-	}
-	read(fd, &model, offsetof(t_model, reserved) + RESERVED_SIZE);
-	model.vertices = malloc(model.vertex_count * sizeof(*model.vertices));
-	read(fd, model.vertices, model.vertex_count * sizeof(*model.vertices));
-	model.indices = malloc(model.index_count * sizeof(*model.indices));
-	read(fd, model.indices, model.index_count * sizeof(*model.indices));
-	// model.texture = ft_read_texture_data(fd, &model);
+	model = (t_model *)_model;
+	object_constructor(model);
+	model->mesh.texture = NULL;
+	model->mesh.vertices = vertices;
+	model->mesh.vertex_count = 0;
+	model->mesh.indices = indices;
+	model->mesh.index_count = 0;
+	model->obj.draw = ft_draw_model;
 }
