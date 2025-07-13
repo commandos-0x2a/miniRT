@@ -37,31 +37,31 @@ void	destroy_game(t_game *game)
 	exit(0);
 }
 
-// int32_t main(void)
-// {
-// 	t_game	*game;
+int32_t main(void)
+{
+	t_game	*game;
 
-// 	game = calloc(1, sizeof(*game));
+	game = calloc(1, sizeof(*game));
 
 
-// 	// Gotta error check this stuff
-// 	if (!(game->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
-// 	{
-// 		puts(mlx_strerror(mlx_errno));
-// 		return(EXIT_FAILURE);
-// 	}
-// 	game->camera = init_camera(game->mlx, 60, WIDTH, HEIGHT);
-// 	if (!game->camera)
-// 		destroy_game(game);
-// 	game->cube = init_cube((t_vector3){0, 0, 0}, (t_vector3){0}, NULL);
-// 	if (!game->cube)
-// 		destroy_game(game);
-// 	mlx_loop_hook(game->mlx, ft_draw, game);
+	// Gotta error check this stuff
+	if (!(game->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
+	{
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	game->camera = init_camera(game->mlx, 60, WIDTH, HEIGHT);
+	if (!game->camera)
+		destroy_game(game);
+	game->cube = init_cube((t_vector3){0, 0, 0}, (t_vector3){0}, NULL);
+	if (!game->cube)
+		destroy_game(game);
+	mlx_loop_hook(game->mlx, ft_draw, game);
 
-// 	mlx_loop(game->mlx);
+	mlx_loop(game->mlx);
 	
-// 	destroy_game(game);
-// 	return (EXIT_SUCCESS);
-// }
+	destroy_game(game);
+	return (EXIT_SUCCESS);
+}
 
 

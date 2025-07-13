@@ -13,12 +13,12 @@
 #ifndef PROJECTION_H
 # define PROJECTION_H
 
-# include "../object/camera.h"
-# include "../object/components.h"
-# include "../object/cube.h"
-# include "../object/drawing.h"
-# include "../object/geometric.h"
-# include "../object/object.h"
+# include "camera.h"
+# include "components.h"
+# include "cube.h"
+# include "drawing.h"
+# include "model.h"
+# include "object.h"
 
 # include <MLX42/MLX42.h>
 # include <math.h>

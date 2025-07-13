@@ -13,12 +13,7 @@
 #ifndef CUBE_H
 #define CUBE_H
 
-<<<<<<< HEAD
 #include "model.h"
-=======
-#include "geometric.h"
-#include "../projection/projection.h"
->>>>>>> refs/remotes/origin/master
 
 typedef struct s_cube
 {

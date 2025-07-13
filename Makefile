@@ -23,9 +23,7 @@ SRC = main.c							\
 	object/mesh.c						\
 	object/camera.c						\
 	object/drawing.c					\
-	projection/projection.c				\
-	projection/test_projection.c 		\
-	object/model.c		\
+	object/model.c						\
 
 OBJ = $(SRC:%.c=build/%.o)
 
