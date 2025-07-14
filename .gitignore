@@ -5,3 +5,4 @@ miniRT
 
 build
 *.o
+projection/projection
