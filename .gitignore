@@ -4,3 +4,4 @@
 miniRT
 
 build
+*.o
