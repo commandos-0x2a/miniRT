@@ -8,8 +8,8 @@
 # define FOV 45.0f
 # define NEAR 1.0f
 # define FAR 100.0f
-# define SCREEN_WIDTH 1920
-# define SCREEN_HEIGHT 1080
+# define SCREEN_WIDTH 1000
+# define SCREEN_HEIGHT 800
 
 
 typedef struct s_camera
@@ -57,14 +57,14 @@ t_geometric *ft_create_cube()
         return NULL;
     }
     // Define cube vertices
-    geo->vertices[0] = (t_vec3){200, 200, 30};
-    geo->vertices[1] = (t_vec3){300, 200, 30};
-    geo->vertices[2] = (t_vec3){300, 300, 30};
-    geo->vertices[3] = (t_vec3){200, 300, 30};
-    geo->vertices[4] = (t_vec3){200, 200, 2};
-    geo->vertices[5] = (t_vec3){300, 200, 2};
-    geo->vertices[6] = (t_vec3){300, 300, 2};
-    geo->vertices[7] = (t_vec3){200, 300, 2};
+    geo->vertices[0] = (t_vec3){-1, -1, -5};
+    geo->vertices[1] = (t_vec3){1, -1, -5};
+    geo->vertices[2] = (t_vec3){1, 1, -5};
+    geo->vertices[3] = (t_vec3){-1, 1, -5};
+    geo->vertices[4] = (t_vec3){-1, -1, -7};
+    geo->vertices[5] = (t_vec3){1, -1, -7};
+    geo->vertices[6] = (t_vec3){1, 1, -7};
+    geo->vertices[7] = (t_vec3){-1, 1, -7};
     // Define cube indices for drawing triangles
     unsigned int indices[] = {
         0, 2, 1, 2, 3, 0, // top
@@ -88,6 +88,7 @@ void ft_perspective_projection(t_vec3 *vec, float fov, float aspect_ratio,
     float projected_x;
     float projected_y;
     float focal_length;
+    float w;
 
     if (!vec)
         return;
@@ -99,9 +100,20 @@ void ft_perspective_projection(t_vec3 *vec, float fov, float aspect_ratio,
     projected_x = (focal_length / aspect_ratio) * vec->x;
     // M[1][1] = focal_length;
     projected_y = focal_length * vec->y;
+
+    // M[2][2] = (far + near) * range_inv;
+    // M[2][3] = (-2.0* far * near) * range_inv;
     projected_z = ((far + near) * range_inv) * vec->z + (2.0f * near * far * range_inv);
-    vec->x = projected_x; // Adjust x based on aspect ratio
-    vec->y = projected_y; // Adjust y based on focal length
+    // M[3][2] = -1
+    w = -vec->z; // Assuming w is the homogeneous coordinate, set it to -z for perspective division
+    if (w != 0.0f)
+    {
+        projected_x /= w;
+        projected_y /= w;
+        projected_z /= w;
+    }
+    vec->x = (projected_x + 1.0f) * 0.5f * SCREEN_WIDTH; // Adjust x based on aspect ratio
+    vec->y = (1.0f - projected_y) * 0.5f * SCREEN_HEIGHT; // Adjust y based on focal length
     vec->z = projected_z;
 }
 
@@ -117,33 +129,49 @@ void ft_apply_projection(t_geometric *geo, mlx_image_t *image)//, float fov,
         printf("Vertex %d: x: %f, y: %f, z: %f\n", i, geo->vertices[i].x, geo->vertices[i].y, geo->vertices[i].z);
         ft_perspective_projection(&geo->vertices[i], FOV, aspect_ratio, NEAR, FAR);
         // Check bounds before drawing
-        fprintf(stderr, "after projection: x: %f, y: %f, z: %f\n", vec->x, vec->y, vec->z);
+        fprintf(stderr, "after projection:\nVertex %d: x: %f, y: %f, z: %f\n", i, geo->vertices[i].x, geo->vertices[i].y, geo->vertices[i].z);
         mlx_put_pixel(image, (int)geo->vertices[i].x, (int)geo->vertices[i].y, 0xFFFFFF);
     }
 }
 
 void ft_draw_cube(mlx_image_t *image, t_geometric *geo)
 {
-    for (int i = 0; i < geo->indices_count; i += 3)
+    int i;
+
+    i = 0;
+    if (!image || !geo || !geo->vertices || !geo->indices)
     {
-        // Draw triangles using the indices
-        int v1 = geo->indices[i];
-        int v2 = geo->indices[i + 1];
-        int v3 = geo->indices[i + 2];
-        
-        // Draw lines between vertices (simple line drawing)
-        mlx_put_pixel(image, (int)geo->vertices[v1].x, (int)geo->vertices[v1].y, 0xAAAFFF);
-        mlx_put_pixel(image, (int)geo->vertices[v2].x, (int)geo->vertices[v2].y, 0xAAAFFF);
-        mlx_put_pixel(image, (int)geo->vertices[v3].x, (int)geo->vertices[v3].y, 0xAAAFFF);
+        fprintf(stderr, "Invalid image or geometric data\n");
+        return;
     }
+    printf("Drawing cube with %d vertices and %d indices\n", geo->vertices_count, geo->indices_count);
+    // Draw vertices
+    for (i = 0; i < geo->vertices_count; i++)
+    {
+        mlx_put_pixel(image, geo->vertices[i].x, geo->vertices[i].y, 0xFFFFFF);
+        fprintf(stderr, "Vertex %d: x: %f, y: %f, z: %f\n", i, geo->vertices[i].x, geo->vertices[i].y, geo->vertices[i].z);
+    }
+    // Draw edges (simple line drawing)
+    // Note: This is a simplified version, you might want to implement a proper line drawing
+    // algorithm for better results.
+    // for (int i = 0; i < geo->vertices_count; i++)
+    // {
+    //     int next = (i + 1) % geo->vertices_count; // Connect to next vertex
+    //     mlx_put_pixel(image, (int)geo->vertices[i].x, (int)geo->vertices[i].y, 0xFFFFFF);
+    //     mlx_put_pixel(image, (int)geo->vertices[next].x, (int)geo->vertices[next].y, 0xFFFFFF);
+    // }
+    // Draw indices (triangles)
+    // for (i = 0; i < geo->indices_count; i += 3)
+    // {
+    //     int v1 = geo->indices[i];
+    //     int v2 = geo->indices[i + 1];
+    //     int v3 = geo->indices[i + 2];
+    //     mlx_put_pixel(image, (int)geo->vertices[v1].x, (int)geo->vertices[v1].y, 0xFFFFFF);
+    //     mlx_put_pixel(image, (int)geo->vertices[v2].x, (int)geo->vertices[v2].y, 0xFFFFFF);
+    //     mlx_put_pixel(image, (int)geo->vertices[v3].x, (int)geo->vertices[v3].y, 0xFFFFFF);
+    // }       
     printf("finished drawing cube\n");
 }
-
-// static void ft_error(void)
-// {
-// 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
-// 	exit(EXIT_FAILURE);
-// }
 
 int main()
 {
@@ -166,9 +194,16 @@ int main()
     mlx_image_to_window(mlx, image, 0, 0);
     fprintf(stderr, "mlx_image_to_window: %s\n", mlx_strerror(mlx_errno));
     cube = ft_create_cube();
+    if (!cube || !cube->vertices || !cube->indices)
+    {
+        fprintf(stderr, "ft_create_cube failed: %s\n", mlx_strerror(mlx_errno));
+        mlx_delete_image(mlx, image);
+        mlx_terminate(mlx);
+        return EXIT_FAILURE;
+    }
     fprintf(stderr, "ft_create_cube: %s\n", mlx_strerror(mlx_errno));
-    ft_draw_cube(image, cube);
     ft_apply_projection(cube, image);//, 45.0f, aspect_ratio, 1.0f, 100.0f, image);
+    ft_draw_cube(image, cube);
     mlx_loop(mlx);
     mlx_delete_image(mlx, image);
     mlx_terminate(mlx);
