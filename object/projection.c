@@ -6,11 +6,14 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 14:46:38 by rsrour            #+#    #+#             */
-/*   Updated: 2025/07/13 17:20:01 by rsrour           ###   ########.fr       */
+/*   Updated: 2025/07/15 13:40:14 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projection.h"
+#include "camera.h"
+#include <unistd.h>
+#include <stdio.h>
 
 /*
 A camera's frustum can be thought of as 6 planes, and any objects between 
@@ -44,3 +47,37 @@ but I will try to do it.
 //     //     draw(mlx, &cube->geo.obj, camera);
 //     // }
 // }
+
+void ft_perspective_projection(t_vector3 *vec, t_camera *camera)
+{
+    float range_inv;
+    float projected_z;
+    float projected_x;
+    float projected_y;
+    float focal_length;
+    float w;
+
+    if (!vec)
+        return;
+    focal_length = 1.0f / tanf(camera->fov * 0.5f * (M_PI / 180.0f));
+    range_inv = -1.0f / (camera->far - camera->near);
+    // M[0][0] = focal_length / aspect_ratio;
+    projected_x = (focal_length / camera->aspect_ratio) * vec->x;
+    // M[1][1] = focal_length;
+    projected_y = focal_length * vec->y;
+    // M[2][2] = (far + near) * range_inv;
+    // M[2][3] = (-2.0* far * near) * range_inv;
+    projected_z = ((camera->far + camera->near) * range_inv) * vec->z + (2.0f * camera->near * camera->far * range_inv);
+    // M[3][2] = -1
+    w = -vec->z; // Assuming w is the homogeneous coordinate, set it to -z for perspective division
+    if (w != 0.0f)
+    {
+        projected_x /= w;
+        projected_y /= w;
+        projected_z /= w;
+    }
+    vec->x = (projected_x + 1.0f) * 0.5f * camera->width; // Adjust x based on aspect ratio
+    vec->y = (1.0f - projected_y) * 0.5f * camera->height; // Adjust y based on focal length
+    vec->z = projected_z;
+}
+

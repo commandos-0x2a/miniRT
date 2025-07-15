@@ -94,13 +94,11 @@ void ft_perspective_projection(t_vec3 *vec, float fov, float aspect_ratio,
         return;
     focal_length = 1.0f / tanf(fov * 0.5f * (M_PI / 180.0f));
     range_inv = -1.0f / (far - near);
-
     //Apply perspective projection
     // M[0][0] = focal_length / aspect_ratio;
     projected_x = (focal_length / aspect_ratio) * vec->x;
     // M[1][1] = focal_length;
     projected_y = focal_length * vec->y;
-
     // M[2][2] = (far + near) * range_inv;
     // M[2][3] = (-2.0* far * near) * range_inv;
     projected_z = ((far + near) * range_inv) * vec->z + (2.0f * near * far * range_inv);
@@ -117,8 +115,7 @@ void ft_perspective_projection(t_vec3 *vec, float fov, float aspect_ratio,
     vec->z = projected_z;
 }
 
-void ft_apply_projection(t_geometric *geo, mlx_image_t *image)//, float fov, 
-    //float aspect_ratio, float near, float far, mlx_image_t *image)
+void ft_apply_projection(t_geometric *geo)
 {
     printf("Applying perspective projection...\n");
     printf("Vertices count: %d\n", geo->vertices_count);
@@ -130,7 +127,7 @@ void ft_apply_projection(t_geometric *geo, mlx_image_t *image)//, float fov,
         ft_perspective_projection(&geo->vertices[i], FOV, aspect_ratio, NEAR, FAR);
         // Check bounds before drawing
         fprintf(stderr, "after projection:\nVertex %d: x: %f, y: %f, z: %f\n", i, geo->vertices[i].x, geo->vertices[i].y, geo->vertices[i].z);
-        mlx_put_pixel(image, (int)geo->vertices[i].x, (int)geo->vertices[i].y, 0xFFFFFF);
+        //mlx_put_pixel(image, (int)geo->vertices[i].x, (int)geo->vertices[i].y, 0xFFFFFF);
     }
 }
 
@@ -160,7 +157,7 @@ void ft_draw_cube(mlx_image_t *image, t_geometric *geo)
     //     mlx_put_pixel(image, (int)geo->vertices[i].x, (int)geo->vertices[i].y, 0xFFFFFF);
     //     mlx_put_pixel(image, (int)geo->vertices[next].x, (int)geo->vertices[next].y, 0xFFFFFF);
     // }
-    // Draw indices (triangles)
+    // // Draw indices (triangles)
     // for (i = 0; i < geo->indices_count; i += 3)
     // {
     //     int v1 = geo->indices[i];
@@ -202,10 +199,14 @@ int main()
         return EXIT_FAILURE;
     }
     fprintf(stderr, "ft_create_cube: %s\n", mlx_strerror(mlx_errno));
-    ft_apply_projection(cube, image);//, 45.0f, aspect_ratio, 1.0f, 100.0f, image);
+    ft_apply_projection(cube);
     ft_draw_cube(image, cube);
     mlx_loop(mlx);
     mlx_delete_image(mlx, image);
     mlx_terminate(mlx);
     return EXIT_SUCCESS;
 }
+
+
+//create rotation function
+// rotate then apply projection

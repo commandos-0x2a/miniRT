@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include "components.h"
 #include <MLX42/MLX42.h>
-#include "projection/projection.h"
+#include "projection.h"
 
 #define WIDTH 1080
 #define HEIGHT 720

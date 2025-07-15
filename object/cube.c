@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:17:40 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/13 17:06:22 by rsrour           ###   ########.fr       */
+/*   Updated: 2025/07/15 12:51:55 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ t_cube *init_cube(t_vector3 pos, t_vector3 rotation, mlx_image_t *texture)
 	sizeof(cube->vertices) / sizeof(cube->vertices[0]);
 	cube->model.mesh.index_count =
 	sizeof(cube->indices) / sizeof(cube->indices[0]);
-	//cube->geo.obj.draw = project_cube;
 	memset(cube->vertices, 0, sizeof(cube->vertices));
 	memset(cube->indices, 0, sizeof(cube->indices));
 	set_vertices(cube->vertices);
