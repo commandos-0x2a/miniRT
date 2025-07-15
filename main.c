@@ -9,8 +9,8 @@
 #include "components.h"
 #include <MLX42/MLX42.h>
 
-#define WIDTH 1080
-#define HEIGHT 720
+#define WIDTH 1000
+#define HEIGHT 800
 
 typedef struct	s_game
 {
@@ -50,7 +50,7 @@ int32_t main(void)
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	game->camera = init_camera(game->mlx, 60, WIDTH, HEIGHT);
+	game->camera = init_camera(game->mlx, 45.0f, WIDTH, HEIGHT);
 	if (!game->camera)
 		destroy_game(game);
 	game->cube = init_cube((t_vector3){0, 0, 0}, (t_vector3){0}, NULL);

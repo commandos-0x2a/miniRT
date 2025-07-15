@@ -62,7 +62,6 @@ t_camera	*init_camera(mlx_t *mlx, float fov, uint32_t frame_width, uint32_t fram
 	if (!camera)
 		return (NULL);
 	object_constructor(camera);
-	camera->fov = fov;
 	camera->frame = mlx_new_image(mlx, frame_width, frame_height);
 	if (!camera->frame)
 	{
@@ -75,8 +74,9 @@ t_camera	*init_camera(mlx_t *mlx, float fov, uint32_t frame_width, uint32_t fram
 		puts(mlx_strerror(mlx_errno));
 		return (NULL);
 	}
-	camera->projection = perspective_projection;
+	camera->fov = fov;
 	camera->near = 1.f;
 	camera->far = 100.f;
+	camera->projection = perspective_projection;
 	return (camera);
 }

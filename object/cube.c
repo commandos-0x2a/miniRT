@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:17:40 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/15 12:51:55 by rsrour           ###   ########.fr       */
+/*   Updated: 2025/07/16 00:17:21 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 
 static void set_vertices(t_vertex *vertices)
 {
-	vertices[0] = (t_vertex){1, 1, 1, 0, 0, 0};		// top front	0
-	vertices[1] = (t_vertex){-1, 1, 1, 0, 0, 0};	// top left		1
-	vertices[2] = (t_vertex){-1, 1, -1, 0, 0, 0};	// top back		2
-	vertices[3] = (t_vertex){1, 1, -1, 0, 0, 0};	// top right	3
-	vertices[4] = (t_vertex){1, -1, 1, 0, 0, 0};	// down front	4
-	vertices[5] = (t_vertex){-1, -1, 1, 0, 0, 0};	// down left	5
-	vertices[6] = (t_vertex){-1, -1, -1, 0, 0, 0};	// down back	6
-	vertices[7] = (t_vertex){1, -1, -1, 0, 0, 0};	// down right	7
+	vertices[0] = (t_vertex){1, 1, -5, 0, 0, 0};		// top front	0
+	vertices[1] = (t_vertex){-1, 1, -5, 0, 0, 0};	// top left		1
+	vertices[2] = (t_vertex){-1, 1, -7, 0, 0, 0};	// top back		2
+	vertices[3] = (t_vertex){1, 1, -7, 0, 0, 0};	// top right	3
+	vertices[4] = (t_vertex){1, -1, -5, 0, 0, 0};	// down front	4
+	vertices[5] = (t_vertex){-1, -1, -5, 0, 0, 0};	// down left	5
+	vertices[6] = (t_vertex){-1, -1, -7, 0, 0, 0};	// down back	6
+	vertices[7] = (t_vertex){1, -1, -7, 0, 0, 0};	// down right	7
 }
 
 static void set_indices(uint32_t *indices, size_t count)

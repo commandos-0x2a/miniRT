@@ -123,10 +123,11 @@ void ft_apply_projection(t_geometric *geo)
     printf("Aspect ratio: %f\n", aspect_ratio);
     for (int i = 0; i < geo->vertices_count; i++)
     {
-        printf("Vertex %d: x: %f, y: %f, z: %f\n", i, geo->vertices[i].x, geo->vertices[i].y, geo->vertices[i].z);
+        fprintf(stderr, "Vertex %d: x: %f, y: %f, z: %f\n", i, geo->vertices[i].x, geo->vertices[i].y, geo->vertices[i].z);
         ft_perspective_projection(&geo->vertices[i], FOV, aspect_ratio, NEAR, FAR);
         // Check bounds before drawing
-        fprintf(stderr, "after projection:\nVertex %d: x: %f, y: %f, z: %f\n", i, geo->vertices[i].x, geo->vertices[i].y, geo->vertices[i].z);
+        fprintf(stderr, "Vertex %d: x: %f, y: %f, z: %f\n", i, geo->vertices[i].x, geo->vertices[i].y, geo->vertices[i].z);
+        fprintf(stderr, "-------------------\n");
         //mlx_put_pixel(image, (int)geo->vertices[i].x, (int)geo->vertices[i].y, 0xFFFFFF);
     }
 }

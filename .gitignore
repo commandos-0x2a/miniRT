@@ -1,5 +1,6 @@
 .vscode
 
+%.dSYM
 %.o
 miniRT
 
