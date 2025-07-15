@@ -13,7 +13,7 @@
 #include "object.h"
 #include <string.h>
 
-void	draw(mlx_t *mlx, void *_obj, void *camera)
+void	draw_object(mlx_t *mlx, void *_obj, void *camera)
 {
 	t_object	*obj;
 	void (*draw_func)(mlx_t *, t_object *, void *);

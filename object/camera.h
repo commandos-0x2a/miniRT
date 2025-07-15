@@ -29,10 +29,13 @@ typedef struct s_camera
 	float			aspect_ratio; // Aspect ratio of the camera
 	float			near; // Near clipping plane distance
 	float			far; // Far clipping plane distance
-	float			height; // Height of the camera's view
-	float			width; // Width of the camera's view
+	int				height; // Height of the camera's view
+	int				width; // Width of the camera's view
+	void			(*projection)();
 }	t_camera;
 
 t_camera	*init_camera(mlx_t *mlx, float fov, uint32_t frame_width, uint32_t frame_height);
+void		camera_apply_projection(t_camera *camera, t_vertex dst[3], t_vertex *src_v3);
+
 
 #endif // CAMERA_H

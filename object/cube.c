@@ -15,21 +15,21 @@
 #include <stdio.h>
 #include <string.h>
 
-static void set_vertices(vertex_t *vertices)
+static void set_vertices(t_vertex *vertices)
 {
-	vertices[0] = (vertex_t){1, 1, 1, 0, 0, 0};		// top front	0
-	vertices[1] = (vertex_t){-1, 1, 1, 0, 0, 0};	// top left		1
-	vertices[2] = (vertex_t){-1, 1, -1, 0, 0, 0};	// top back		2
-	vertices[3] = (vertex_t){1, 1, -1, 0, 0, 0};	// top right	3
-	vertices[4] = (vertex_t){1, -1, 1, 0, 0, 0};	// down front	4
-	vertices[5] = (vertex_t){-1, -1, 1, 0, 0, 0};	// down left	5
-	vertices[6] = (vertex_t){-1, -1, -1, 0, 0, 0};	// down back	6
-	vertices[7] = (vertex_t){1, -1, -1, 0, 0, 0};	// down right	7
+	vertices[0] = (t_vertex){1, 1, 1, 0, 0, 0};		// top front	0
+	vertices[1] = (t_vertex){-1, 1, 1, 0, 0, 0};	// top left		1
+	vertices[2] = (t_vertex){-1, 1, -1, 0, 0, 0};	// top back		2
+	vertices[3] = (t_vertex){1, 1, -1, 0, 0, 0};	// top right	3
+	vertices[4] = (t_vertex){1, -1, 1, 0, 0, 0};	// down front	4
+	vertices[5] = (t_vertex){-1, -1, 1, 0, 0, 0};	// down left	5
+	vertices[6] = (t_vertex){-1, -1, -1, 0, 0, 0};	// down back	6
+	vertices[7] = (t_vertex){1, -1, -1, 0, 0, 0};	// down right	7
 }
 
-static void set_indices(GLuint *indices, size_t count)
+static void set_indices(uint32_t *indices, size_t count)
 {
-	memcpy(indices, (GLuint [36]){
+	memcpy(indices, (uint32_t [36]){
 						0, 1, 2, // top			0
 						2, 3, 0, // top			1
 						4, 5, 6, // down		2
@@ -42,7 +42,7 @@ static void set_indices(GLuint *indices, size_t count)
 						5, 6, 2, // sur down	9
 						6, 7, 3, // sur down	10
 						7, 4, 0	 // sur down	11
-					}, count * sizeof(GLuint));
+					}, count * sizeof(uint32_t));
 }
 
 

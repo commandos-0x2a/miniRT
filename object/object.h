@@ -16,6 +16,16 @@
 #include <MLX42/MLX42.h>
 #include <stdint.h>
 
+typedef struct s_vertex
+{
+	float	x;
+	float	y;
+	float	z;
+	float	u;
+	float	v;
+	int8_t	tex;
+}	t_vertex;
+
 typedef struct	s_vector3
 {
 	float	x;
@@ -30,7 +40,7 @@ typedef struct	s_object
 	void		(*draw)();
 }	t_object;
 
-void	draw(mlx_t *mlx, void *_obj, void *camera);
+void	draw_object(mlx_t *mlx, void *_obj, void *camera);
 
 void    object_constructor(void *_obj);
 

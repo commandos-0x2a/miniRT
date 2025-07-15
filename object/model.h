@@ -14,7 +14,6 @@
 #define MODEL_H
 
 #include <math.h>
-#include <MLX42/MLX42_Int.h>
 #include "object.h"
 #include "mesh.h"
 
@@ -25,6 +24,6 @@ typedef struct s_model
 } t_model;
 
 void	model_constructor(void *_mod, 
-		vertex_t *vertices, GLuint *indices);
+		t_vertex *vertices, uint32_t *indices);
 
 #endif // MODEL_H

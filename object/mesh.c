@@ -3,11 +3,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stddef.h>
-
-// mlx_image_t *ft_read_texture_date(int fd, t_model *model)
-// {
-// 	//fill later
-// }
+#include <stdlib.h>
 
 int	load_mesh(t_mesh *mesh, const char *filename)
 {

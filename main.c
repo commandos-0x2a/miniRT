@@ -8,7 +8,6 @@
 #include <stdbool.h>
 #include "components.h"
 #include <MLX42/MLX42.h>
-#include "projection.h"
 
 #define WIDTH 1080
 #define HEIGHT 720
@@ -25,16 +24,17 @@ void ft_draw(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	draw(game->mlx, game->cube, game->camera);
+	game->camera->aspect_ratio = ((float)game->camera->frame->width / (float)game->camera->frame->height);
+	draw_object(game->mlx, game->cube, game->camera);
 }
 
 void	destroy_game(t_game *game)
 {
 	free(game->camera);
 	free(game->cube);
+	printf("%s\n", __func__);
 	mlx_terminate(game->mlx);
 	free(game);
-	exit(0);
 }
 
 int32_t main(void)
