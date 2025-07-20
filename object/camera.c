@@ -2,8 +2,72 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 
-static	void perspective_projection(t_camera *camera, t_vertex *dst, t_vertex *src)
+static void	perspective_projection(t_camera *camera, t_mat4 *mat)
+{
+	float	focal_length;
+	float	range_inv;
+
+	memset(mat, 0, sizeof(*mat));
+	focal_length = 1.0f / tanf(camera->fov * 0.5f * (M_PI / 180.0f));
+	range_inv = -1.0f / (camera->far - camera->near);
+	mat->buf[0][0] = focal_length / camera->aspect_ratio;
+	mat->buf[1][1] = focal_length;
+	mat->buf[2][2] = (camera->far + camera->near) * range_inv;
+	mat->buf[2][3] = 2.0f * camera->near * camera->far * range_inv;
+	mat->buf[3][2] = -1.f;
+}
+
+void		update_camera_matrix(t_camera *camera)
+{
+	void	(*projection)(t_camera *, t_mat4 *);
+	t_mat4	proj_mat;
+	t_mat4	transform_mat;
+
+	memset(&camera->matrix, 0, sizeof(camera->matrix));
+	memset(&proj_mat, 0, sizeof(proj_mat));
+	memset(&transform_mat, 0, sizeof(transform_mat));
+	projection = camera->projection;
+	if (projection)
+		projection(camera, &proj_mat);
+	get_transform_matrix(camera, &transform_mat);
+
+	// TODO: multi proj_mat * transform_mat
+	// set res to camera matrix
+}
+
+t_camera	*init_camera(mlx_t *mlx, float fov, uint32_t frame_width, uint32_t frame_height)
+{
+	t_camera	*camera;
+
+	camera = malloc(sizeof(camera));
+	if (!camera)
+		return (NULL);
+	object_constructor(camera);
+	camera->fov = fov;
+	camera->frame = mlx_new_image(mlx, frame_width, frame_height);
+	if (!camera->frame)
+	{
+		free(camera);
+		return (NULL);
+	}
+	if (mlx_image_to_window(mlx, camera->frame, 0, 0) == -1)
+	{
+		free(camera);
+		puts(mlx_strerror(mlx_errno));
+		return (NULL);
+	}
+	camera->projection = perspective_projection;
+	camera->near = 1.f;
+	camera->far = 100.f;
+	return (camera);
+}
+
+
+
+
+void old_perspective_projection(t_camera *camera, t_vertex *dst, t_vertex *src)
 {
 	float	range_inv;
 	float	projected_z;
@@ -54,29 +118,3 @@ void	camera_apply_projection(t_camera *camera, t_vertex dst[3], t_vertex *src_v3
 	}
 }
 
-t_camera	*init_camera(mlx_t *mlx, float fov, uint32_t frame_width, uint32_t frame_height)
-{
-	t_camera	*camera;
-
-	camera = malloc(sizeof(camera));
-	if (!camera)
-		return (NULL);
-	object_constructor(camera);
-	camera->fov = fov;
-	camera->frame = mlx_new_image(mlx, frame_width, frame_height);
-	if (!camera->frame)
-	{
-		free(camera);
-		return (NULL);
-	}
-	if (mlx_image_to_window(mlx, camera->frame, 0, 0) == -1)
-	{
-		free(camera);
-		puts(mlx_strerror(mlx_errno));
-		return (NULL);
-	}
-	camera->projection = perspective_projection;
-	camera->near = 1.f;
-	camera->far = 100.f;
-	return (camera);
-}

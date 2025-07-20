@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yaltayeh <yaltayeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:17:47 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/15 13:12:12 by rsrour           ###   ########.fr       */
+/*   Updated: 2025/07/20 17:53:24 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ typedef struct s_camera
 	float			far; // Far clipping plane distance
 	int				height; // Height of the camera's view
 	int				width; // Width of the camera's view
+	t_mat4			matrix;
 	void			(*projection)();
 }	t_camera;
 
 t_camera	*init_camera(mlx_t *mlx, float fov, uint32_t frame_width, uint32_t frame_height);
-void		camera_apply_projection(t_camera *camera, t_vertex dst[3], t_vertex *src_v3);
-
+void		camera_apply_projection(t_camera *camera, t_vertex dst[3], t_vertex *src_v3); // TODO: remove this
+void		update_camera_matrix(t_camera *camera); // TODO: 
 
 #endif // CAMERA_H

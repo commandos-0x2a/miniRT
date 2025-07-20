@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: yaltayeh <yaltayeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:18:00 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/11 11:42:52 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/20 18:33:28 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <MLX42/MLX42.h>
 #include <stdint.h>
+#include "utils.h"
 
 typedef struct s_vertex
 {
@@ -26,17 +27,12 @@ typedef struct s_vertex
 	int8_t	tex;
 }	t_vertex;
 
-typedef struct	s_vector3
-{
-	float	x;
-	float	y;
-	float	z;
-}	t_vector3;
+
+
 
 typedef struct	s_object
 {
-	t_vector3	pos;
-	t_vector3	rotation;
+	t_transform	trans;
 	void		(*draw)();
 }	t_object;
 

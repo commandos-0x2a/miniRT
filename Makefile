@@ -24,6 +24,7 @@ SRC = main.c							\
 	object/camera.c						\
 	object/drawing.c					\
 	object/model.c						\
+	object/matrix.c						\
 
 OBJ = $(SRC:%.c=build/%.o)
 

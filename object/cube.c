@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yaltayeh <yaltayeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:17:40 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/15 12:51:55 by rsrour           ###   ########.fr       */
+/*   Updated: 2025/07/20 17:40:10 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ t_cube *init_cube(t_vector3 pos, t_vector3 rotation, mlx_image_t *texture)
 	if (!cube)
 		return (NULL);
 	model_constructor(cube, cube->vertices, cube->indices);
-	cube->model.obj.pos = pos;
-	cube->model.obj.rotation = rotation;
+	cube->model.obj.trans.position = pos;
+	cube->model.obj.trans.rotation = rotation;
+	cube->model.obj.trans.scale = (t_vector3){1.f, 1.f, 1.f};
 	cube->model.mesh.texture = texture;
 	cube->model.mesh.vertex_count =
 	sizeof(cube->vertices) / sizeof(cube->vertices[0]);
