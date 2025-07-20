@@ -6,23 +6,23 @@
 /*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:18:03 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/11 11:42:24 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/16 01:15:45 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
 #include <string.h>
 
-void	draw_object(mlx_t *mlx, void *_obj, void *camera)
+void	render_object(mlx_t *mlx, void *_obj, void *camera)
 {
 	t_object	*obj;
-	void (*draw_func)(mlx_t *, t_object *, void *);
+	void (*render_func)(mlx_t *, t_object *, void *);
 
 	obj = (t_object *)_obj;
-	if (obj && obj->draw)
+	if (obj && obj->render)
 	{
-		draw_func = obj->draw;
-		draw_func(mlx, obj, camera);
+		render_func = obj->render;
+		render_func(mlx, obj, camera);
 	}
 }
 

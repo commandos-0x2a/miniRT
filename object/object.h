@@ -6,7 +6,7 @@
 /*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:18:00 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/11 11:42:52 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/16 01:15:31 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ typedef struct	s_object
 {
 	t_vector3	pos;
 	t_vector3	rotation;
-	void		(*draw)();
+	void		(*render)();
 }	t_object;
 
-void	draw_object(mlx_t *mlx, void *_obj, void *camera);
+void	render_object(mlx_t *mlx, void *_obj, void *camera);
 
 void    object_constructor(void *_obj);
 

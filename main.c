@@ -25,7 +25,7 @@ void ft_draw(void *param)
 
 	game = (t_game *)param;
 	game->camera->aspect_ratio = ((float)game->camera->frame->width / (float)game->camera->frame->height);
-	draw_object(game->mlx, game->cube, game->camera);
+	render_object(game->mlx, game->cube, game->camera);
 }
 
 void	destroy_game(t_game *game)

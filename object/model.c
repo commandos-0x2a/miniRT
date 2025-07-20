@@ -3,34 +3,32 @@
 #include <math.h>
 #include "drawing.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <MLX42/MLX42_Int.h>
 
-static void	remap_uv(mlx_image_t *frame, t_vertex vertices[3], mlx_image_t *texture)
-{
-	(void)texture;
+// static void render_model(mlx_t *mlx, t_model *model, t_camera *camera)
+// {
+// 	uint32_t	i;
+// 	uint32_t	j;
+// 	mlx_image_t	*texture;
 
-	for (int i = 0; i < 3; i++)
-	{
-		printf("%s i=%i x=%2f y=%2f\n", __func__, i, vertices[i].x, vertices[i].y);
-		draw_circle(frame, vertices[i].x, vertices[i].y, 5, 0xff0000ff);
-	}
-}
+// 	mlx_ctx_t* mlxctx = mlx->context;
+// 	texture = model->mesh.texture;
+// 	glBindTexture(GL_TEXTURE_2D, ((mlx_image_ctx_t*)texture->context)->texture);
+// 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture->width, texture->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture->pixels);
 
-static void draw_model(mlx_t *mlx, t_model *model, t_camera *camera)
-{
-	(void)mlx;
-	(void)model;
-	(void)camera;
-	t_vertex	vertices[3];
-	uint32_t	i;
-
-	i = 0;
-	while (i < model->mesh.vertex_count)
-	{
-		camera_apply_projection(camera, vertices, model->mesh.vertices + i);
-		remap_uv(camera->frame, vertices, NULL);
-		i += 3;
-	}
-}
+// 	i = 0;
+// 	while (i < model->mesh.index_count)
+// 	{
+// 		j = 0;
+// 		while (j < 3)
+// 		{
+// 			camera_apply_projection(camera, new_vertices + i, &model->mesh.vertices[model->mesh.indices[i]]);
+// 			j++;
+// 			i++;
+// 		}
+// 	}
+// }
 
 void	model_constructor(void *_model, 
 		t_vertex *vertices, uint32_t *indices)
@@ -44,5 +42,5 @@ void	model_constructor(void *_model,
 	model->mesh.vertex_count = 0;
 	model->mesh.indices = indices;
 	model->mesh.index_count = 0;
-	model->obj.draw = draw_model;
+	// model->obj.render = render_model;
 }
