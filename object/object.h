@@ -6,7 +6,7 @@
 /*   By: yaltayeh <yaltayeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:18:00 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/20 18:33:28 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/20 21:10:05 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ typedef struct s_vertex
 typedef struct	s_object
 {
 	t_transform	trans;
-	void		(*draw)();
+	void		(*render)();
 }	t_object;
 
-void	draw_object(mlx_t *mlx, void *_obj, void *camera);
+void	render_object(mlx_t *mlx, void *_obj, void *camera);
 
 void    object_constructor(void *_obj);
 

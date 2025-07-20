@@ -47,6 +47,9 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
+test:
+	$(CC) $(CFLAGS) $(CPPFLAGS) -o test_projection projection/test_projection.c $(LDFLAGS)
+
 re: fclean all
 
-.PHONY: all clean fclean re MLX42
+.PHONY: all clean fclean re MLX42 test

@@ -117,4 +117,3 @@ void	camera_apply_projection(t_camera *camera, t_vertex dst[3], t_vertex *src_v3
 		i++;
 	}
 }
-

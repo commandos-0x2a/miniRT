@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaltayeh <yaltayeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/10 23:17:40 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/20 17:40:10 by yaltayeh         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/07/20 21:10:34 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cube.h"
 #include <stdlib.h>
@@ -17,14 +18,14 @@
 
 static void set_vertices(t_vertex *vertices)
 {
-	vertices[0] = (t_vertex){1, 1, 1, 0, 0, 0};		// top front	0
-	vertices[1] = (t_vertex){-1, 1, 1, 0, 0, 0};	// top left		1
-	vertices[2] = (t_vertex){-1, 1, -1, 0, 0, 0};	// top back		2
-	vertices[3] = (t_vertex){1, 1, -1, 0, 0, 0};	// top right	3
-	vertices[4] = (t_vertex){1, -1, 1, 0, 0, 0};	// down front	4
-	vertices[5] = (t_vertex){-1, -1, 1, 0, 0, 0};	// down left	5
-	vertices[6] = (t_vertex){-1, -1, -1, 0, 0, 0};	// down back	6
-	vertices[7] = (t_vertex){1, -1, -1, 0, 0, 0};	// down right	7
+	vertices[0] = (t_vertex){1, 1, -5, 0, 0, 0};		// top front	0
+	vertices[1] = (t_vertex){-1, 1, -5, 0, 0, 0};	// top left		1
+	vertices[2] = (t_vertex){-1, 1, -7, 0, 0, 0};	// top back		2
+	vertices[3] = (t_vertex){1, 1, -7, 0, 0, 0};	// top right	3
+	vertices[4] = (t_vertex){1, -1, -5, 0, 0, 0};	// down front	4
+	vertices[5] = (t_vertex){-1, -1, -5, 0, 0, 0};	// down left	5
+	vertices[6] = (t_vertex){-1, -1, -7, 0, 0, 0};	// down back	6
+	vertices[7] = (t_vertex){1, -1, -7, 0, 0, 0};	// down right	7
 }
 
 static void set_indices(uint32_t *indices, size_t count)
