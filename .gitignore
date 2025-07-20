@@ -1,9 +1,10 @@
 .vscode
 
 %.dSYM
-%.o
 miniRT
 
 build
 *.o
 projection/projection
+
+*.a

@@ -2,8 +2,8 @@ NAME = miniRT
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-CPPFLAGS = -IMLX42/include -Iobject
-LDFLAGS =  -lmlx42 -lglfw -lm -Lbuild
+CPPFLAGS = -IMLX42/include -Iobject -Ilibft/include 
+LDFLAGS =  -lmlx42 -lglfw -lm -Lbuild -Llibft -lft
 
 ifeq ($(DEBUG), 1)
 	CFLAGS += -DDEBUG
@@ -34,7 +34,10 @@ MLX42:
 	cmake -S MLX42 -B build -Wno-dev
 	cmake --build build -j4
 
-$(NAME): $(OBJ)
+libft:
+	$(MAKE) -C libft
+
+$(NAME): $(OBJ) | libft
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 build/%.o: %.c
@@ -52,4 +55,4 @@ test:
 
 re: fclean all
 
-.PHONY: all clean fclean re MLX42 test
+.PHONY: all clean fclean re MLX42 test libft
