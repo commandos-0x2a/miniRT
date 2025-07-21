@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include "components.h"
 #include <MLX42/MLX42.h>
+#include <ft_printf.h>
 
 #define WIDTH 1000
 #define HEIGHT 800
@@ -43,7 +44,7 @@ int32_t main(void)
 
 	game = calloc(1, sizeof(*game));
 
-
+	LOG_INFO("test");
 	// Gotta error check this stuff
 	if (!(game->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{

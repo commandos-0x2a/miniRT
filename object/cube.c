@@ -6,7 +6,7 @@
 /*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/07/20 21:14:48 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/21 13:56:41 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,13 @@ static void set_indices(uint32_t *indices, size_t count)
 
 t_cube *init_cube(t_vector3 pos, t_vector3 rotation, mlx_image_t *texture)
 {
-	t_cube *cube;
+	t_cube 		*cube;
+	static int	id;
 
 	cube = calloc(1, sizeof(*cube));
 	if (!cube)
 		return (NULL);
+	set_object_name(cube, "cube", &id);
 	model_constructor(cube, cube->vertices, cube->indices);
 	cube->model.obj.transform.position = pos;
 	cube->model.obj.transform.rotation = rotation;

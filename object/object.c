@@ -6,12 +6,13 @@
 /*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:18:03 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/16 01:15:45 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/20 23:32:46 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
 #include <string.h>
+#include <ft_printf.h>
 
 void	render_object(mlx_t *mlx, void *_obj, void *camera)
 {
@@ -26,10 +27,23 @@ void	render_object(mlx_t *mlx, void *_obj, void *camera)
 	}
 }
 
-void	object_constructor(void *_obj)
+void	set_object_name(void *_obj, const char *name, int *id)
 {
 	t_object	*obj;
 
+	obj = _obj;
+	if (!obj->is_name_set)
+	{
+		ft_snprintf(obj->name, sizeof(obj->name), "%s %d", name, (*id)++);
+		obj->is_name_set = 1;
+	}
+}
+
+void	object_constructor(void *_obj)
+{
+	t_object	*obj;
+	static int	id;
+
 	obj = (t_object *)_obj;
-	memset(obj, 0, sizeof(*obj));
+	set_object_name(obj, "object", &id);
 }

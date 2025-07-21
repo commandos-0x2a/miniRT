@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   model.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/20 21:24:41 by yaltayeh          #+#    #+#             */
+/*   Updated: 2025/07/21 13:56:11 by yaltayeh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "model.h"
 #include "camera.h"
 #include <math.h>
@@ -33,9 +45,11 @@
 void	model_constructor(void *_model, 
 		t_vertex *vertices, uint32_t *indices)
 {
-	t_model	*model;
+	t_model		*model;
+	static int	id;
 
 	model = (t_model *)_model;
+	set_object_name(model, "model", &id);
 	object_constructor(model);
 	model->mesh.texture = NULL;
 	model->mesh.vertices = vertices;

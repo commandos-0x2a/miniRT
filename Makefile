@@ -2,12 +2,10 @@ NAME = miniRT
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-CPPFLAGS = -IMLX42/include -Iobject -Ilibft/include 
+CPPFLAGS += -IMLX42/include -Iobject -Ilibft/include 
 LDFLAGS =  -lmlx42 -lglfw -lm -Lbuild -Llibft -lft
 
-ifeq ($(DEBUG), 1)
-	CFLAGS += -DDEBUG
-endif
+include debug/log.mk
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
