@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include <log.h>
 
 static void	perspective_projection(t_camera *camera, t_mat4 *mat)
 {
@@ -40,10 +41,12 @@ void		update_camera_matrix(t_camera *camera)
 t_camera	*init_camera(mlx_t *mlx, float fov, uint32_t frame_width, uint32_t frame_height)
 {
 	t_camera	*camera;
+	static int	id;
 
-	camera = malloc(sizeof(camera));
+	camera = ft_calloc(1, sizeof(camera));
 	if (!camera)
 		return (NULL);
+	set_object_name(camera, "camera", &id);
 	object_constructor(camera);
 	camera->fov = fov;
 	camera->frame = mlx_new_image(mlx, frame_width, frame_height);

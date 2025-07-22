@@ -2,7 +2,7 @@ NAME = miniRT
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-CPPFLAGS += -IMLX42/include -Iobject -Ilibft/include 
+CPPFLAGS = -IMLX42/include -Iobject -Ilibft/include -Idebug
 LDFLAGS =  -lmlx42 -lglfw -lm -Lbuild -Llibft -lft
 
 include debug/log.mk
@@ -15,10 +15,9 @@ else ifeq ($(UNAME_S), Darwin)
 	CPPFLAGS += -I"/opt/homebrew/Cellar/glfw/3.4/include"
 endif
 
-SRC = main.c							\
+SRC += main.c							\
 	object/object.c						\
 	object/cube.c						\
-	object/mesh.c						\
 	object/camera.c						\
 	object/drawing.c					\
 	object/model.c						\

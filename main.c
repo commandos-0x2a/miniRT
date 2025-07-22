@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include "components.h"
 #include <MLX42/MLX42.h>
-#include <ft_printf.h>
+#include "log.h"
 
 #define WIDTH 1000
 #define HEIGHT 800
@@ -26,6 +26,7 @@ void ft_draw(void *param)
 
 	game = (t_game *)param;
 	game->camera->aspect_ratio = ((float)game->camera->frame->width / (float)game->camera->frame->height);
+	update_camera_matrix(game->camera);
 	render_object(game->mlx, game->cube, game->camera);
 }
 
@@ -44,7 +45,9 @@ int32_t main(void)
 
 	game = calloc(1, sizeof(*game));
 
-	LOG_INFO("test");
+	game->cube = init_cube((t_vector3){0}, (t_vector3){0}, NULL);
+	if (!game->cube)
+		destroy_game(game);
 	// Gotta error check this stuff
 	if (!(game->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{
@@ -53,9 +56,6 @@ int32_t main(void)
 	}
 	game->camera = init_camera(game->mlx, 45.0f, WIDTH, HEIGHT);
 	if (!game->camera)
-		destroy_game(game);
-	game->cube = init_cube((t_vector3){0, 0, 0}, (t_vector3){0}, NULL);
-	if (!game->cube)
 		destroy_game(game);
 	mlx_loop_hook(game->mlx, ft_draw, game);
 

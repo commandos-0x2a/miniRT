@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: yaltayeh <yaltayeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:18:03 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/20 23:32:46 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/22 17:07:32 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
 #include <string.h>
-#include <ft_printf.h>
+#include "log.h"
 
 void	render_object(mlx_t *mlx, void *_obj, void *camera)
 {
@@ -46,4 +46,5 @@ void	object_constructor(void *_obj)
 
 	obj = (t_object *)_obj;
 	set_object_name(obj, "object", &id);
+	LOG_DEBUG("init %s", obj->name);
 }
