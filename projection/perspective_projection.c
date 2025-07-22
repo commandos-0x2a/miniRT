@@ -1,4 +1,5 @@
 #include "camera.h"
+#define __USE_XOPEN
 #include <math.h>
 #include <libft.h>
 

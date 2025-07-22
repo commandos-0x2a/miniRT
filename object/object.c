@@ -6,7 +6,7 @@
 /*   By: yaltayeh <yaltayeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:18:03 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/22 17:07:32 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/22 17:20:03 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,5 @@ void	object_constructor(void *_obj)
 
 	obj = (t_object *)_obj;
 	set_object_name(obj, "object", &id);
-	LOG_DEBUG("init %s", obj->name);
+	LOG_DEBUG("init \"%s\"", obj->name);
 }

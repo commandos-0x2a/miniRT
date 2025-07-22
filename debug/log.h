@@ -6,7 +6,7 @@
 /*   By: yaltayeh <yaltayeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 14:28:11 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/22 16:56:36 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/22 18:01:00 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #define LOG_H
 
 #include <ft_printf.h>
+
+#ifndef DEBUG_FD
+#define DEBUG_FD 2
+#endif
 
 # ifndef LOG_DEBUG
 #  define LOG_DEBUG	log_msg

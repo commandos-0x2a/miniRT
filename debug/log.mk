@@ -1,6 +1,13 @@
-LOG_MSG = ft_fprintf(2, "%s:%d "format"\n",__FILE__, __LINE__, \#\#__VA_ARGS__)
+LOG_MSG = LOG_MSG(format, \#\#__VA_ARGS__)
 
-LOG_LEVEL ?= ERROR  DEBUG 
+LOG_LEVEL ?= ERROR DEBUG FATAL
+
+DEBUG_FD ?= 5
+
+CPPFLAGS += -D'LOG_MSG(format, ...)=ft_fprintf($(DEBUG_FD), "%s:%d "format"\n",__FILE__, __LINE__, \#\#__VA_ARGS__)'
+
+
+CPPFLAGS += -D'DEBUG_FD=$(DEBUG_FD)'
 
 ifneq ($(findstring DEBUG,$(LOG_LEVEL)),)
 CPPFLAGS += -D'LOG_DEBUG(format, ...)=$(LOG_MSG)'
