@@ -1,6 +1,16 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+typedef struct s_vertex
+{
+	float	x;
+	float	y;
+	float	z;
+	float	u;
+	float	v;
+	int8_t	tex;
+}	t_vertex;
+
 typedef struct	s_vector3
 {
 	float	x;

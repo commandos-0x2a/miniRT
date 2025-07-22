@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cube.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: yaltayeh <yaltayeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/07/20 21:14:48 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/22 17:37:06 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "cube.h"
 #include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#include <libft.h>
 
 static void set_vertices(t_vertex *vertices)
 {
@@ -30,7 +29,7 @@ static void set_vertices(t_vertex *vertices)
 
 static void set_indices(uint32_t *indices, size_t count)
 {
-	memcpy(indices, (uint32_t [36]){
+	ft_memcpy(indices, (uint32_t [36]){
 						0, 1, 2, // top			0
 						2, 3, 0, // top			1
 						4, 5, 6, // down		2
@@ -49,23 +48,23 @@ static void set_indices(uint32_t *indices, size_t count)
 
 t_cube *init_cube(t_vector3 pos, t_vector3 rotation, mlx_image_t *texture)
 {
-	t_cube *cube;
+	t_cube 		*cube;
+	static int	id;
 
-	cube = calloc(1, sizeof(*cube));
+	cube = ft_calloc(1, sizeof(*cube));
 	if (!cube)
 		return (NULL);
-	model_constructor(cube, cube->vertices, cube->indices);
+	set_object_name(cube, "cube", &id);
+	model_constructor(cube);
 	cube->model.obj.transform.position = pos;
 	cube->model.obj.transform.rotation = rotation;
 	cube->model.obj.transform.scale = (t_vector3){1.f, 1.f, 1.f};
-	cube->model.mesh.texture = texture;
-	cube->model.mesh.vertex_count =
+	cube->model.texture = texture;
+	cube->model.vertex_count =
 	sizeof(cube->vertices) / sizeof(cube->vertices[0]);
-	cube->model.mesh.index_count =
+	cube->model.index_count =
 	sizeof(cube->indices) / sizeof(cube->indices[0]);
-	memset(cube->vertices, 0, sizeof(cube->vertices));
-	memset(cube->indices, 0, sizeof(cube->indices));
 	set_vertices(cube->vertices);
-	set_indices(cube->indices, cube->model.mesh.index_count);
+	set_indices(cube->indices, cube->model.index_count);
 	return (cube);
 }

@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   model.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yaltayeh <yaltayeh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/20 21:24:41 by yaltayeh          #+#    #+#             */
+/*   Updated: 2025/07/22 14:00:49 by yaltayeh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "model.h"
 #include "camera.h"
 #include <math.h>
 #include "drawing.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <MLX42/MLX42_Int.h>
 
 // static void render_model(mlx_t *mlx, t_model *model, t_camera *camera)
 // {
@@ -30,17 +41,18 @@
 // 	}
 // }
 
-void	model_constructor(void *_model, 
-		t_vertex *vertices, uint32_t *indices)
+void	model_constructor(void *_model)
 {
-	t_model	*model;
+	t_model		*model;
+	static int	id;
 
 	model = (t_model *)_model;
+	set_object_name(model, "model", &id);
 	object_constructor(model);
-	model->mesh.texture = NULL;
-	model->mesh.vertices = vertices;
-	model->mesh.vertex_count = 0;
-	model->mesh.indices = indices;
-	model->mesh.index_count = 0;
+	model->vertices = NULL;
+	model->vertex_count = 0;
+	model->indices = NULL;
+	model->index_count = 0;
+	model->texture = NULL;
 	// model->obj.render = render_model;
 }
