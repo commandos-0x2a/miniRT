@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "components_.h"
+#include "../object/components.h"
 #include <MLX42/MLX42.h>
 #include <ft_printf.h>
 

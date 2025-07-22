@@ -1,5 +1,5 @@
-#include "object_.h"
-
+#include "../object/object.h"
+#include <libft.h>
 //test for input location
 // # define _X 10
 // # define _Y 20
@@ -31,6 +31,7 @@ t_mat4 *set_obj_mat(t_object *obj)
     mat->buf[3][2] = obj->transform.position.z; // Set translation in z
     mat->buf[3][3] = 1.0f; // Set homogeneous coordinate
     //set rotation matrix based on obj->transform.rotation
+    return mat;
 }
 
 void	get_transform_matrix(void *_obj, t_mat4 *mat)

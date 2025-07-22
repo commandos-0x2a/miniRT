@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 CPPFLAGS += -I../MLX42/include -Iobject_ -I../libft/include 
 LDFLAGS =  -lmlx42 -lglfw -lm -Lbuild -L../libft -lft
 
-include debug/log.mk
+include ../debug/log.mk
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
@@ -16,13 +16,11 @@ else ifeq ($(UNAME_S), Darwin)
 endif
 
 SRC = main_.c							\
-	object_/object_.c						\
-	object_/cube_.c						\
-	object_/mesh_.c						\
-	object_/camera_.c						\
-	object_/drawing_.c					\
-	object_/model_.c						\
-	object_/matrix_.c						\
+	camera_.c						\
+	matrix_.c						\
+	../object/utils.c					\
+	../object/cube.c					\
+	../object/drawing.c 					\
 
 OBJ = $(SRC:%.c=build/%.o)
 

@@ -1,4 +1,4 @@
-#include "camera_.h"
+#include "../object/camera.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>

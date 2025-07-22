@@ -34,7 +34,7 @@ CPPFLAGS += -D'LOG_ERROR(...)=;'
 endif
 
 ifneq ($(findstring FATAL,$(LOG_LEVEL)),)
-CPPFLAGS += -D'LOG_FATAL(msg)=$(LOG_MSG)'
+CPPFLAGS += -D'LOG_FATAL(msg, ...)=$(LOG_MSG)'
 else
 CPPFLAGS += -D'LOG_FATAL(...)=;'
 endif
