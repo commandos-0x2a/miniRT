@@ -1,9 +1,9 @@
 #include "object_.h"
 
 //test for input location
-# define _X 10
-# define _Y 20
-# define _Z 30
+// # define _X 10
+// # define _Y 20
+// # define _Z 30
 
 //we will recieve the location of the object in the .rt file
 
@@ -17,6 +17,21 @@ void mat4_mult_vec4(t_mat4 *mat, t_vector3 *vec, t_vector3 *result)
 
 // we should first set the transform matrix coff based on input data, and default values,
 // then we use
+
+t_mat4 *set_obj_mat(t_object *obj)
+{
+    t_mat4 *mat;
+
+    ft_memset(&mat, 0, sizeof(t_mat4));
+    mat->buf[0][0] = 1.0f; // Set scale in x
+    mat->buf[1][1] = 1.0f; // Set scale in y
+    mat->buf[2][2] = 1.0f; // Set scale in z
+    mat->buf[3][0] = obj->transform.position.x; // Set translation in x
+    mat->buf[3][1] = obj->transform.position.y; // Set translation in y
+    mat->buf[3][2] = obj->transform.position.z; // Set translation in z
+    mat->buf[3][3] = 1.0f; // Set homogeneous coordinate
+    //set rotation matrix based on obj->transform.rotation
+}
 
 void	get_transform_matrix(void *_obj, t_mat4 *mat)
 {

@@ -46,11 +46,12 @@ int32_t main(void)
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	game->cube = init_cube((t_vector3){0, 0, 0}, (t_vector3){0}, NULL);
-	if (!game->cube)
-		destroy_game(game);
+	LOG_INFO("mlx initialized");
 	game->camera = init_camera(game->mlx, 45.0f, WIDTH, HEIGHT);
 	if (!game->camera)
+		destroy_game(game);
+	game->cube = init_cube((t_vector3){0, 0, 0}, (t_vector3){0}, NULL);
+	if (!game->cube)
 		destroy_game(game);
 	mlx_loop_hook(game->mlx, ft_draw, game);
 

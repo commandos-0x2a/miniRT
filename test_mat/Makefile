@@ -3,7 +3,7 @@ NAME = miniRT
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 CPPFLAGS += -I../MLX42/include -Iobject_ -I../libft/include 
-LDFLAGS =  -lmlx42 -lglfw -lm -Lbuild -Llibft -lft
+LDFLAGS =  -lmlx42 -lglfw -lm -Lbuild -L../libft -lft
 
 include debug/log.mk
 
@@ -33,7 +33,7 @@ MLX42:
 	cmake --build build -j4
 
 libft:
-	$(MAKE) -C libft
+	$(MAKE) -C ../libft
 
 $(NAME): $(OBJ) | libft
 	$(CC) -o $@ $^ $(LDFLAGS)

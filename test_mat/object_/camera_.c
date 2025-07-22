@@ -25,13 +25,13 @@ void		update_camera_matrix(t_camera *camera)
 	t_mat4	proj_mat;
 	t_mat4	transform_mat;
 
-	memset(&camera->matrix, 0, sizeof(camera->matrix));
-	memset(&proj_mat, 0, sizeof(proj_mat));
+	// memset(&camera->matrix, 0, sizeof(camera->matrix));
+	// memset(&proj_mat, 0, sizeof(proj_mat));
 	memset(&transform_mat, 0, sizeof(transform_mat));
+	get_transform_matrix(camera, &transform_mat);
 	projection = camera->projection;
 	if (projection)
 		projection(camera, &proj_mat);
-	get_transform_matrix(camera, &transform_mat);
 
 	// TODO: multi proj_mat * transform_mat
 	// set res to camera matrix
