@@ -1,12 +1,13 @@
 #include "camera.h"
 #include <math.h>
+#include <libft.h>
 
 void	perspective_projection(t_camera *camera, t_mat4 *mat)
 {
 	float	focal_length;
 	float	range_inv;
 
-	memset(mat, 0, sizeof(*mat));
+	ft_bzero(mat, sizeof(*mat));
 	focal_length = 1.0f / tanf(camera->fov * 0.5f * (M_PI / 180.0f));
 	range_inv = -1.0f / (camera->far - camera->near);
 	mat->buf[0][0] = focal_length / camera->aspect_ratio;

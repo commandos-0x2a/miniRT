@@ -2,7 +2,7 @@ NAME = miniRT
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-CPPFLAGS = -IMLX42/include -Iobject -Ilibft/include -Idebug
+CPPFLAGS = -IMLX42/include -Iobject -Ilibft/include -Iprojection -Idebug
 LDFLAGS =  -lmlx42 -lglfw -lm -Lbuild -Llibft -lft
 
 include debug/log.mk
@@ -22,6 +22,7 @@ SRC += main.c							\
 	object/drawing.c					\
 	object/model.c						\
 	object/matrix.c						\
+	projection/perspective_projection.c	\
 
 OBJ = $(SRC:%.c=build/%.o)
 
