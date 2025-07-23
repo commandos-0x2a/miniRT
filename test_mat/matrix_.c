@@ -30,6 +30,9 @@ t_mat4 *set_obj_mat(t_object *obj)
     mat->buf[3][1] = obj->transform.position.y; // Set translation in y
     mat->buf[3][2] = obj->transform.position.z; // Set translation in z
     mat->buf[3][3] = 1.0f; // Set homogeneous coordinate
+    mat->buf[0][3] = 0.0f; // Set homogeneous coordinate for x
+    mat->buf[1][3] = 0.0f; // Set homogeneous coordinate for y
+    mat->buf[2][3] = 0.0f; // Set homogeneous coordinate for z
     //set rotation matrix based on obj->transform.rotation
     return mat;
 }
