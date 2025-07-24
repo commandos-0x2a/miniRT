@@ -64,57 +64,8 @@ void draw_circle(mlx_image_t *image,
 //     }
 // }
 
-void draw_line(mlx_image_t *image, int x1, int y1, int x2, int y2) {
-	int dx = x2 - x1;
-	int dy = y2 - y1;
-	float m = 0;
-	if (dx != 0)
-		m = (float)dy / (float)dx;
-	int x;
-	int y;
 
-	// printf(
-	// 	"line x1: %d, y1: %d"
-	// 	"  x2: %d, y2: %d\n",
-	// 	x1, y1,
-	// 	x2, y2
-	// );
-	if (x1 == x2)
-	{
-		y = (y1 < y2) ? y1 : y2;
-		x = x1;
-		while (y <= ((y1 > y2) ? y1 : y2))
-		{
-			if (y >= 0 && y < (int)image->height && x >= 0 && x < (int)image->width)
-				mlx_put_pixel(image, x, y, 0xff0000ff);
-			y++;
-		}
-	}
-	else if (x1 < x2)
-	{
-		x = x1;
-		while (x <= x2)
-		{
-			y = m * (x - x1) + y1;
-			if (y >= 0 && y < (int)image->height && x >= 0 && x < (int)image->width)
-				mlx_put_pixel(image, x, y, 0xff0000ff);
-			x++;
-		}
-	}
-	else
-	{
-		x = x2;
-		while (x <= x1)
-		{
-			y = m * (x - x2) + y2;
-			if (y >= 0 && y < (int)image->height && x >= 0 && x < (int)image->width)
-				mlx_put_pixel(image, x, y, 0xff0000ff);
-			x++;
-		}
-	}
-}
-
-void draw_line2(mlx_image_t *image, int x0, int y0, int x1, int y1) {
+void draw_line(mlx_image_t *image, int x0, int y0, int x1, int y1) {
     int dx = abs(x1 - x0);
     int sx = x0 < x1 ? 1 : -1;
     int dy = -abs(y1 - y0);
@@ -167,7 +118,7 @@ void draw_triangle(mlx_image_t *image,
 	// 	x3, y3
 	// );
 
-	draw_line2(image, x1, y1, x2, y2);
-	draw_line2(image, x2, y2, x3, y3);
-	draw_line2(image, x3, y3, x1, y1);
+	draw_line(image, x1, y1, x2, y2);
+	draw_line(image, x2, y2, x3, y3);
+	draw_line(image, x3, y3, x1, y1);
 }
