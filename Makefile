@@ -24,7 +24,12 @@ SRC += main.c							\
 	utils/matrix.c						\
 	projection/perspective_projection.c	\
 
+TEST_SRC = shader/barycentric_triangle.c
+TEST_OBJ = $(TEST_SRC:%.c=build/%.o)
+TEST_NAME = barycentric_triangle
+
 OBJ = $(SRC:%.c=build/%.o)
+
 
 all: MLX42 $(NAME)
 
@@ -48,8 +53,10 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-test:
-	$(CC) $(CFLAGS) $(CPPFLAGS) -o test_projection projection/test_projection.c $(LDFLAGS)
+test: $(TEST_NAME)
+
+$(TEST_NAME): $(TEST_OBJ)
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 re: fclean all
 
