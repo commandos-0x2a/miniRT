@@ -2,7 +2,7 @@ NAME = miniRT
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
-CPPFLAGS = -IMLX42/include -Iobject -Ilibft/include -Iprojection -Idebug
+CPPFLAGS = -IMLX42/include -Iobject -Ilibft/include -Icomponents -Iutils -Iprojection -Idebug
 LDFLAGS =  -lmlx42 -lglfw -lm -Lbuild -Llibft -lft # -fsanitize=address
 
 include debug/log.mk
@@ -16,12 +16,12 @@ else ifeq ($(UNAME_S), Darwin)
 endif
 
 SRC += main.c							\
+	components/cube.c					\
 	object/object.c						\
-	object/cube.c						\
-	object/camera.c						\
-	object/drawing.c					\
 	object/model.c						\
-	object/matrix.c						\
+	object/camera.c						\
+	utils/drawing.c						\
+	utils/matrix.c						\
 	projection/perspective_projection.c	\
 
 OBJ = $(SRC:%.c=build/%.o)

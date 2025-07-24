@@ -114,6 +114,35 @@ void draw_line(mlx_image_t *image, int x1, int y1, int x2, int y2) {
 	}
 }
 
+void draw_line2(mlx_image_t *image, int x0, int y0, int x1, int y1) {
+    int dx = abs(x1 - x0);
+    int sx = x0 < x1 ? 1 : -1;
+    int dy = -abs(y1 - y0);
+    int sy = y0 < y1 ? 1 : -1;
+    int error = dx + dy;
+    
+    while (1)
+	{
+		if (y0 >= 0 && y0 < (int)image->height && x0 >= 0 && x0 < (int)image->width)
+        	mlx_put_pixel(image, x0, y0, 0x0000ffff);
+        int  e2 = 2 * error;
+        if (e2 >= dy)
+		{
+            if (x0 == x1) 
+				break;
+            error = error + dy;
+            x0 = x0 + sx;
+		}
+        if (e2 <= dx)
+		{
+            if (y0 == y1) 
+				break;
+            error = error + dx;
+            y0 = y0 + sy;
+		}
+	}
+}
+
 uint32_t umin(uint32_t a, uint32_t b)
 {
 	return (a < b) ? a : b;
@@ -138,7 +167,7 @@ void draw_triangle(mlx_image_t *image,
 	// 	x3, y3
 	// );
 
-	draw_line(image, x1, y1, x2, y2);
-	draw_line(image, x2, y2, x3, y3);
-	draw_line(image, x3, y3, x1, y1);
+	draw_line2(image, x1, y1, x2, y2);
+	draw_line2(image, x2, y2, x3, y3);
+	draw_line2(image, x3, y3, x1, y1);
 }
