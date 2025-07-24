@@ -20,16 +20,6 @@ typedef struct	s_game
 	t_camera	*camera;
 }	t_game;
 
-void ft_draw(void *param)
-{
-	t_game	*game;
-
-	game = (t_game *)param;
-	game->camera->aspect_ratio = ((float)game->camera->frame->width / (float)game->camera->frame->height);
-	update_camera_matrix(game->camera);
-	render_object(game->mlx, game->cube, game->camera);
-}
-
 void	destroy_game(t_game *game)
 {
 	free(game->camera);
@@ -39,13 +29,54 @@ void	destroy_game(t_game *game)
 	free(game);
 }
 
+void ft_draw(void *param)
+{
+	t_game	*game;
+	t_camera *camera;
+
+	game = (t_game *)param;
+	camera = game->camera;
+
+	ft_bzero(camera->frame->pixels, camera->width * camera->height * 4);
+	update_camera_matrix(game->camera);
+	render_object(game->mlx, game->cube, game->camera);
+}
+
+void key_hook(mlx_key_data_t keydata, void *param)
+{
+	t_game		*game;
+	t_object	*player;
+
+	game = param;
+	player = (t_object *)game->camera;
+	if (keydata.key == MLX_KEY_A)
+		player->transform.position.x += 0.01f;
+	else if (keydata.key == MLX_KEY_D)
+		player->transform.position.x -= 0.01f;
+	else if (keydata.key == MLX_KEY_W)
+		player->transform.position.z -= 0.01f;
+	else if (keydata.key == MLX_KEY_S)
+		player->transform.position.z += 0.01f;
+	else if (keydata.key == MLX_KEY_Q)
+		player->transform.position.y += 0.01f;
+	else if (keydata.key == MLX_KEY_E)
+		player->transform.position.y -= 0.01f;
+	else
+		return;
+	// printf("player move (%2f, %2f, %2f)\n", 
+	// 	player->transform.position.x,
+	// 	player->transform.position.y,
+	// 	player->transform.position.z);
+}
+
 int32_t main(void)
 {
 	t_game	*game;
 
-	game = calloc(1, sizeof(*game));
+	LOG_DEBUG("start");
+	game = ft_calloc(1, sizeof(*game));
 
-	game->cube = init_cube((t_vector3){0}, (t_vector3){0}, NULL);
+	game->cube = init_cube(NULL);
 	if (!game->cube)
 		destroy_game(game);
 	// Gotta error check this stuff
@@ -57,7 +88,9 @@ int32_t main(void)
 	game->camera = init_camera(game->mlx, 45.0f, WIDTH, HEIGHT);
 	if (!game->camera)
 		destroy_game(game);
+
 	mlx_loop_hook(game->mlx, ft_draw, game);
+	mlx_key_hook(game->mlx, key_hook, game);
 
 	mlx_loop(game->mlx);
 	
@@ -65,4 +98,36 @@ int32_t main(void)
 	return (EXIT_SUCCESS);
 }
 
+
+
+int32_t _main(void)
+{
+	mlx_t* mlx;
+	mlx_image_t *image;
+
+	// Gotta error check this stuff
+	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
+	{
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	if (!(image = mlx_new_image(mlx, 128, 128)))
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	if (mlx_image_to_window(mlx, image, 100, 100) == -1)
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	
+	draw_triangle(image, 30, 30, 100, 10, 10, 100);
+
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
+	return (EXIT_SUCCESS);
+}
 

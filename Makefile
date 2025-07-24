@@ -1,9 +1,9 @@
 NAME = miniRT
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 CPPFLAGS = -IMLX42/include -Iobject -Ilibft/include -Iprojection -Idebug
-LDFLAGS =  -lmlx42 -lglfw -lm -Lbuild -Llibft -lft
+LDFLAGS =  -lmlx42 -lglfw -lm -Lbuild -Llibft -lft # -fsanitize=address
 
 include debug/log.mk
 

@@ -23,6 +23,7 @@ void	update_camera_matrix(t_camera *camera)
 		projection(camera, &proj_mat);
 	get_transform_matrix(camera, &transform_mat);
 
+	mat4_mult_mat4(&camera->matrix, proj_mat, transform_mat);
 	// TODO: multi proj_mat * transform_mat
 	// set result to camera matrix
 }
@@ -32,12 +33,14 @@ t_camera	*init_camera(mlx_t *mlx, float fov, uint32_t frame_width, uint32_t fram
 	t_camera	*camera;
 	static int	id;
 
-	camera = ft_calloc(1, sizeof(camera));
+	camera = ft_calloc(1, sizeof(*camera));
 	if (!camera)
 		return (NULL);
 	set_object_name(camera, "camera", &id);
 	object_constructor(camera);
 	camera->fov = fov;
+	camera->width = frame_width;
+	camera->height = frame_height;
 	camera->frame = mlx_new_image(mlx, frame_width, frame_height);
 	if (!camera->frame)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaltayeh <yaltayeh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:17:47 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/20 17:53:24 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/24 05:40:57 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_camera
 	// t_vector3		position; // Position in Cartesian coordinates
 	// t_vector3		orientation; // Orientation in spherical coordinates (radius, theta, phi)
 	float			fov; // Field of view in degrees
-	float			aspect_ratio; // Aspect ratio of the camera
 	float			near; // Near clipping plane distance
 	float			far; // Far clipping plane distance
 	int				height; // Height of the camera's view
