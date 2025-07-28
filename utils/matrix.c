@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 02:01:34 by rsrour            #+#    #+#             */
-/*   Updated: 2025/07/27 18:03:06 by rsrour           ###   ########.fr       */
+/*   Updated: 2025/07/28 09:26:37 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,12 +137,13 @@ void mat4_mult_mat4(t_mat4 *result, t_mat4 a, t_mat4 b)
         for (int j = 0; j < 4; j++)
         {
 			// result->m[i][j] = 0.0f;
-			// LOG_DEBUG("DEBUG: result->m[%d][%d] = %f\n", i, j, result->m[i][j]);
+			LOG_DEBUG("DEBUG: result->m[%d][%d] = %f\n", i, j, result->m[i][j]);
             for (int k = 0; k < 4; k++)
 			{
                 result->m[i][j] += a.m[i][k] * b.m[k][j];
-				// LOG_DEBUG("result->m[%d][%d] += a.m[%d][%d] * b.m[%d][%d]\n", i, j, i, k, k, j);
+				LOG_DEBUG("result->m[%d][%d] += a.m[%d][%d] * b.m[%d][%d]\n", i, j, i, k, k, j);
 			}
+			LOG_DEBUG("DEBUG: result->m[%d][%d] = %f\n", i, j, result->m[i][j]);
         }
     }
 }
