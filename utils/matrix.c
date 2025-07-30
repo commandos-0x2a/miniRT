@@ -6,13 +6,14 @@
 /*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 02:01:34 by rsrour            #+#    #+#             */
-/*   Updated: 2025/07/24 23:52:14 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/30 20:48:07 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
 #include <libft.h>
 #include <stdio.h>
+#include "log.h"
 
 /*
 Start with plain scalar C, write fully unrolled mat4‑mat4 and mat4‑vec4.
@@ -59,19 +60,40 @@ For 3D vectors, the operation is:
 	 we need it because A and B are 4D vectors represented
 	as 4x4 matrices.)
 */
-void mat4_mult_mat4(t_mat4 *result, t_mat4 a, t_mat4 b)
+void mat4_mult_mat4(t_mat4 *result, t_mat4 a, t_mat4 b) // TODO: don't forget to norme me
 {
-    // TODO: convert this to hard coded
-    // remove while loop
-
-    for (int i = 0; i < 4; i++)
-    {
-        for (int j = 0; j < 4; j++)
-        {
-            for (int k = 0; k < 4; k++)
-                result->m[i][j] += a.m[i][k] * b.m[k][j];
-        }
-    }
+    result->m[0][0] += a.m[0][0] * b.m[0][0] + a.m[0][1] * b.m[1][0] + \
+						a.m[0][2] * b.m[2][0] + a.m[0][3] * b.m[3][0];
+    result->m[0][1] += a.m[0][0] * b.m[0][1] + a.m[0][1] * b.m[1][1] + \
+						a.m[0][2] * b.m[2][1] + a.m[0][3] * b.m[3][1];
+    result->m[0][2] += a.m[0][0] * b.m[0][2] + a.m[0][1] * b.m[1][2] + \
+						a.m[0][2] * b.m[2][2] + a.m[0][3] * b.m[3][2];
+	result->m[0][3] += a.m[0][0] * b.m[0][3] + a.m[0][1] * b.m[1][3] + \
+						a.m[0][2] * b.m[2][3] + a.m[0][3] * b.m[3][3];
+	result->m[1][0] += a.m[1][0] * b.m[0][0] + a.m[1][1] * b.m[1][0] + \
+						a.m[1][2] * b.m[2][0] + a.m[1][3] * b.m[3][0];
+	result->m[1][1] += a.m[1][0] * b.m[0][1] + a.m[1][1] * b.m[1][1] + \
+						a.m[1][2] * b.m[2][1] + a.m[1][3] * b.m[3][1];
+	result->m[1][2] += a.m[1][0] * b.m[0][2] + a.m[1][1] * b.m[1][2] + \
+						a.m[1][2] * b.m[2][2] + a.m[1][3] * b.m[3][2];
+	result->m[1][3] += a.m[1][0] * b.m[0][3] + a.m[1][1] * b.m[1][3] + \
+						a.m[1][2] * b.m[2][3] + a.m[1][3] * b.m[3][3];
+	result->m[2][0] += a.m[2][0] * b.m[0][0] + a.m[2][1] * b.m[1][0] + \
+						a.m[2][2] * b.m[2][0] + a.m[2][3] * b.m[3][0];
+	result->m[2][1] += a.m[2][0] * b.m[0][1] + a.m[2][1] * b.m[1][1] + \
+						a.m[2][2] * b.m[2][1] + a.m[2][3] * b.m[3][1];
+	result->m[2][2] += a.m[2][0] * b.m[0][2] + a.m[2][1] * b.m[1][2] + \
+						a.m[2][2] * b.m[2][2] + a.m[2][3] * b.m[3][2];
+	result->m[2][3] += a.m[2][0] * b.m[0][3] + a.m[2][1] * b.m[1][3] + \
+						a.m[2][2] * b.m[2][3] + a.m[2][3] * b.m[3][3];
+	result->m[3][0] += a.m[3][0] * b.m[0][0] + a.m[3][1] * b.m[1][0] + \
+						a.m[3][2] * b.m[2][0] + a.m[3][3] * b.m[3][0];
+	result->m[3][1] += a.m[3][0] * b.m[0][1] + a.m[3][1] * b.m[1][1] + \
+						a.m[3][2] * b.m[2][1] + a.m[3][3] * b.m[3][1];
+	result->m[3][2] += a.m[3][0] * b.m[0][2] + a.m[3][1] * b.m[1][2] + \
+						a.m[3][2] * b.m[2][2] + a.m[3][3] * b.m[3][2];
+	result->m[3][3] += a.m[3][0] * b.m[0][3] + a.m[3][1] * b.m[1][3] + \
+						a.m[3][2] * b.m[2][3] + a.m[3][3] * b.m[3][3];
 }
 
 void	mat3_mult_vec3(t_vector3 *result, t_mat3 *mat, t_vector3 vec)

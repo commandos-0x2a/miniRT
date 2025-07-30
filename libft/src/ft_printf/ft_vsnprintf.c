@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vsnprintf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:33:34 by mkurkar           #+#    #+#             */
-/*   Updated: 2025/06/04 21:14:36 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/28 09:31:57 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,31 @@ static void	ft_handle_string(const char *src, char *buf,
 		put_char_to_buf(buf, *src++, pos, size);
 }
 
+static void ft_handle_float(double f, char *buf, size_t *pos, size_t size)
+{
+	int		int_part;
+	double	frac_part;
+	int		i;
+
+	int_part = (int)f;
+	frac_part = f - int_part;
+	if (f < 0)
+	{
+		put_char_to_buf(buf, '-', pos, size);
+		int_part = -int_part;
+		frac_part = -frac_part;
+	}
+	ft_handle_number(int_part, buf, pos, size);
+	put_char_to_buf(buf, '.', pos, size);
+	i = 0;
+	while (i < 6) // Limit to 6 decimal places
+	{
+		frac_part *= 10;
+		put_char_to_buf(buf, '0' + ((int)frac_part % 10), pos, size);
+		i++;
+	}
+}
+
 int	ft_vsnprintf(char *buf, size_t size, const char *format, va_list ap)
 {
 	size_t	pos;
@@ -72,6 +97,8 @@ int	ft_vsnprintf(char *buf, size_t size, const char *format, va_list ap)
 				ft_handle_number(va_arg(ap, int), buf, &pos, size);
 			else if (*format == 's')
 				ft_handle_string(va_arg(ap, char *), buf, &pos, size);
+			else if (*format == 'f')
+				ft_handle_float(va_arg(ap, double), buf, &pos, size);
 			format++;
 		}
 		else
