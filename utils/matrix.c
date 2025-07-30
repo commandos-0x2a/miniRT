@@ -6,7 +6,7 @@
 /*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 02:01:34 by rsrour            #+#    #+#             */
-/*   Updated: 2025/07/24 14:23:04 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/24 23:52:14 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,13 @@ void mat4_mult_mat4(t_mat4 *result, t_mat4 a, t_mat4 b)
                 result->m[i][j] += a.m[i][k] * b.m[k][j];
         }
     }
+}
+
+void	mat3_mult_vec3(t_vector3 *result, t_mat3 *mat, t_vector3 vec)
+{
+	result->x = mat->m[0][0] * vec.x + mat->m[0][1] * vec.y + mat->m[0][2] * vec.z;
+	result->y = mat->m[1][0] * vec.x + mat->m[1][1] * vec.y + mat->m[1][2] * vec.z;
+	result->z = mat->m[2][0] * vec.x + mat->m[2][1] * vec.y + mat->m[2][2] * vec.z;
 }
 
 void mat4_mult_vec4(t_vector4 *result, t_mat4 *mat, t_vector4 vec)

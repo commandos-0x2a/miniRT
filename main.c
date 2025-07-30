@@ -71,20 +71,25 @@ void key_hook(mlx_key_data_t keydata, void *param)
 
 int32_t main(void)
 {
-	t_game	*game;
+	t_game			*game;
+	mlx_texture_t	*tex;
 
 	LOG_DEBUG("start");
 	game = ft_calloc(1, sizeof(*game));
 
-	game->cube = init_cube(NULL);
-	if (!game->cube)
-		destroy_game(game);
 	// Gotta error check this stuff
 	if (!(game->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
+	tex = mlx_load_png("uv_cube.png");
+	if (!tex)
+		destroy_game(game);
+
+	game->cube = init_cube(NULL);
+	if (!game->cube)
+		destroy_game(game);
 	game->camera = init_camera(game->mlx, 45.0f, WIDTH, HEIGHT);
 	if (!game->camera)
 		destroy_game(game);
@@ -97,37 +102,3 @@ int32_t main(void)
 	destroy_game(game);
 	return (EXIT_SUCCESS);
 }
-
-
-
-int32_t _main(void)
-{
-	mlx_t* mlx;
-	mlx_image_t *image;
-
-	// Gotta error check this stuff
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
-	{
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if (!(image = mlx_new_image(mlx, 128, 128)))
-	{
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if (mlx_image_to_window(mlx, image, 100, 100) == -1)
-	{
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	
-	draw_triangle(image, 30, 30, 100, 10, 10, 100);
-
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	return (EXIT_SUCCESS);
-}
-
