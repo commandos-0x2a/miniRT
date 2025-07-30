@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yaltayeh <yaltayeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 02:01:34 by rsrour            #+#    #+#             */
-/*   Updated: 2025/07/28 12:05:36 by rsrour           ###   ########.fr       */
+/*   Updated: 2025/07/30 13:49:35 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ For 3D vectors, the operation is:
 	 we need it because A and B are 4D vectors represented
 	as 4x4 matrices.)
 */
-void mat4_mult_mat4(t_mat4 *result, t_mat4 a, t_mat4 b) // don't forget to norme me
+void mat4_mult_mat4(t_mat4 *result, t_mat4 a, t_mat4 b) // TODO: don't forget to norme me
 {
     result->m[0][0] += a.m[0][0] * b.m[0][0] + a.m[0][1] * b.m[1][0] + \
 						a.m[0][2] * b.m[2][0] + a.m[0][3] * b.m[3][0];
