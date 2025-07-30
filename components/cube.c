@@ -6,7 +6,7 @@
 /*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/07/24 15:27:45 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/30 20:49:10 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 
 static void set_vertices(t_vertex *vertices)
 {
-	vertices[0] = (t_vertex){1, 1, 1, 0, 0, 0};		// top front	0
-	vertices[1] = (t_vertex){-1, 1, 1, 0, 0, 0};	// top left		1
-	vertices[2] = (t_vertex){-1, 1, -1, 0, 0, 0};	// top back		2
-	vertices[3] = (t_vertex){1, 1, -1, 0, 0, 0};	// top right	3
-	vertices[4] = (t_vertex){1, -1, 1, 0, 0, 0};	// down front	4
-	vertices[5] = (t_vertex){-1, -1, 1, 0, 0, 0};	// down left	5
-	vertices[6] = (t_vertex){-1, -1, -1, 0, 0, 0};	// down back	6
-	vertices[7] = (t_vertex){1, -1, -1, 0, 0, 0};	// down right	7
+	vertices[0] = (t_vertex){1, 1, 1, 0, 0};		// top front	0
+	vertices[1] = (t_vertex){-1, 1, 1, 0, 0};	// top left		1
+	vertices[2] = (t_vertex){-1, 1, -1, 0, 0};	// top back		2
+	vertices[3] = (t_vertex){1, 1, -1, 0, 0};	// top right	3
+	vertices[4] = (t_vertex){1, -1, 1, 0, 0};	// down front	4
+	vertices[5] = (t_vertex){-1, -1, 1, 0, 0};	// down left	5
+	vertices[6] = (t_vertex){-1, -1, -1, 0, 0};	// down back	6
+	vertices[7] = (t_vertex){1, -1, -1, 0, 0};	// down right	7
 }
 
 static void set_indices(uint32_t *indices, size_t count)
@@ -40,7 +40,7 @@ static void set_indices(uint32_t *indices, size_t count)
 }
 
 
-t_cube *init_cube(mlx_image_t *texture)
+t_cube *init_cube(mlx_texture_t *texture)
 {
 	t_cube 		*cube;
 	static int	id;
