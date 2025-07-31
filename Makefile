@@ -24,9 +24,9 @@ SRC += main.c							\
 	utils/matrix.c						\
 	projection/perspective_projection.c	\
 
-TEST_SRC = fragment/barycentric_triangle.c
+TEST_SRC = utils/read_content.c
 TEST_OBJ = $(TEST_SRC:%.c=build/%.o)
-TEST_NAME = barycentric_triangle
+TEST_NAME = read
 
 OBJ = $(SRC:%.c=build/%.o)
 
