@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 02:01:34 by rsrour            #+#    #+#             */
-/*   Updated: 2025/07/31 18:38:41 by rsrour           ###   ########.fr       */
+/*   Updated: 2025/08/01 10:53:33 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,11 @@ t_mat4 	*ft_get_rotation_mat(t_object *obj)
 	ft_bzero(rotation_mat, sizeof(t_mat4));
 	ft_init_rcx(&rcx, obj);
 	rotation_mat->m[0][0] = rcx.cy * rcx.cz;
-	rotation_mat->m[0][1] = -rcx.cy * rcx.sz + rcx.cy; // to be continued
+	rotation_mat->m[0][1] = rcx.cy * rcx.sz;
+	rotation_mat->m[0][2] = -rcx.sy;
+	rotation_mat->m[0][3] = 0.0f;
+	rotation_mat->m[1][0] = -rcx.sz * rcx.cx + rcx.cy * rcx.sz; //(incorrect step) to be continued
+	return (rotation_mat);
 }
 
 int	get_transform_matrix(void *_obj, t_mat4 *mat)
@@ -127,7 +131,7 @@ int	get_transform_matrix(void *_obj, t_mat4 *mat)
 
     obj = _obj;
     ft_bzero(mat, sizeof(t_mat4));
-    scale_mat = get_scale_mat(obj);
+    scale_mat = ft_get_scale_mat(obj);
 	if (!scale_mat)
 	{
 		//log_error("Failed to get scale matrix");
@@ -141,4 +145,5 @@ int	get_transform_matrix(void *_obj, t_mat4 *mat)
     mat->m[1][3] = 0.0f; // Set homogeneous coordinate for y
     mat->m[2][3] = 0.0f; // Set homogeneous coordinate for z
     //set rotation matrix based on obj->transform.rotation
+	return (0);
 }

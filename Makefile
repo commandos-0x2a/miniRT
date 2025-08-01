@@ -21,7 +21,8 @@ SRC += main.c							\
 	object/model.c						\
 	object/camera.c						\
 	utils/drawing.c						\
-	utils/matrix.c						\
+	utils/matrix_multiplication.c		\
+	utils/transformation_matrix.c		\
 	projection/perspective_projection.c	\
 
 TEST_SRC = utils/read_content.c
