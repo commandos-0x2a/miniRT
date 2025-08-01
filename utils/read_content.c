@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_content.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: yaltayeh <yaltayeh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:03:40 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/31 12:27:41 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/31 19:29:52 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*move_content(char *d, char *s, char *d_end)
 		*d++ = *s++;
 	*d = '\0';
 
-	// check is left content
+	// check is overflow
 	if (!*s || d == d_end)
 		return (d);
 	
@@ -103,6 +103,7 @@ int main()
 		if (ret & RC_PRINT)
 			printf("%s\n", buf);
 	}
-	printf("%s\n", buf);
+	if (ret & RC_OVERFLOW)
+		printf("Over flow\n");
 	return (0);
 }
