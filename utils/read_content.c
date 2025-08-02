@@ -6,7 +6,7 @@
 /*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:03:40 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/31 12:27:41 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/08/01 22:08:34 by yaltayeh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,93 +16,111 @@
 #include <string.h>
 #include <fcntl.h>
 #include <stdio.h>
+#include <libft.h>
 
-# define BUFFER_SIZE 15
+# define BUFFER_SIZE 8
 
 # define RC_NONE		0
-# define RC_PRINT		1 << 0
+# define RC_CTX			1 << 0
 # define RC_CONT		1 << 1
-# define RC_OVERFLOW	1 << 2
+# define RC_DELIMITER	1 << 3
+# define RC_OVERFLOW	1 << 7
 # define RC_ERROR		1 << 8
 
 
-char	*move_content(char *d, char *s, char *d_end)
+int move_content2(char **d_r, char *s, char *p, char *delimiters, char *d_end)
+{
+	// move content
+	while (*s && !isspace(*s) && !strchr(delimiters, *s) && *d_r < d_end)
+		*((*d_r)++) = *s++;
+	**d_r = '\0';
+	
+	// check is left content
+	if (*d_r >= d_end)
+		return (RC_OVERFLOW);
+		
+	if (!*s)
+		return (RC_NONE);
+
+	// move leftover to source
+	ft_strlcpy(p, s, -1);
+	return (RC_CTX | RC_CONT);
+}
+
+int	move_content(char **d_r, char *s, char *delimiters, char *d_end)
 {
 	char	*p;
 
 	p = s;
 	// skip white space
-	while (isspace(*s))
+	while (isspace(*s) && !strchr(delimiters, *s))
 		s++;
 
-	// move content
-	while (*s && !isspace(*s) && d < d_end)
-		*d++ = *s++;
-	*d = '\0';
+	if (*s && strchr(delimiters, *s))
+	{
+		ft_strlcpy(p, s + 1, -1);
+		return (RC_DELIMITER | RC_CONT);
+	}
 
-	// check is left content
-	if (!*s || d == d_end)
-		return (d);
-	
-	// skip white space
-	while (isspace(*s))
-		s++;
-	
-	// move leftover to source
-	while (*s)
-		*p++ = *s++;
-	*p = '\0';
-	
-	return (NULL);
+	return (move_content2(d_r, s, p, delimiters, d_end));
 }
 
-ssize_t	read_content(int fd, char content[BUFFER_SIZE])
+ssize_t	read_content(int fd, char *str, size_t size, char *delimiters)
 {
 	static char	buffer[BUFFER_SIZE];
 	char 		*cur;
 	ssize_t		nb_bytes;
+	int			ret;
 
-	cur = content;
-	content[0] = '\0';
+	cur = str;
+	str[0] = '\0';
+	ret = move_content(&cur, buffer, delimiters, str + size);
 	while (1)
 	{
-		cur = move_content(cur, buffer, content + BUFFER_SIZE - 1);
-		if (!cur)
-			return (RC_PRINT | RC_CONT);
-		if (cur >= content + BUFFER_SIZE - 1)
-			return (RC_OVERFLOW);
-		nb_bytes = read(fd, buffer, sizeof(buffer));
+		if (ret)
+			return (ret);
+		nb_bytes = read(fd, buffer, sizeof(buffer) - 1);
+		write(2, buffer, nb_bytes);
+		write(2, "|", 1);
 		if (nb_bytes < 0)
 		{
 			buffer[0] = '\0';
 			return (RC_ERROR);
 		}
 		buffer[nb_bytes] = '\0';
-		if (nb_bytes == 0 && content[0])
-			return (RC_PRINT);
+		if (nb_bytes == 0 && str[0])
+			return (RC_CTX);
 		else if (nb_bytes == 0)
 			return (RC_NONE);
+		ret = move_content2(&cur, buffer, buffer, delimiters, str + size);
+
 	}
 }
 
 int main()
 {
 	int 	fd;
-	char	buf[BUFFER_SIZE];
+	char	str[BUFFER_SIZE];
 
 	fd = open("test.txt", O_RDONLY);
 	if (fd == -1)
 	{
-		perror("open file");
+		perror("test.txt");
 		return (1);
 	}
 	int ret = RC_CONT;
 	while (ret & RC_CONT)
 	{
-		ret = read_content(fd, buf);
-		if (ret & RC_PRINT)
-			printf("%s\n", buf);
+		ret = read_content(fd, str, 12, "\n");
+		if (ret & RC_CTX)
+			printf("%s - ", str);
+		else if (ret & RC_DELIMITER)
+			printf("\\n\n");
 	}
-	printf("%s\n", buf);
+	if (ret & RC_OVERFLOW)
+	{
+		printf("content: %s\n", str);
+		printf("\nOVERFLOW\n");
+	}
 	return (0);
 }

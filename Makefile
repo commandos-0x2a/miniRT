@@ -26,7 +26,7 @@ SRC += main.c							\
 
 TEST_SRC = utils/read_content.c
 TEST_OBJ = $(TEST_SRC:%.c=build/%.o)
-TEST_NAME = read
+TEST_NAME = test
 
 OBJ = $(SRC:%.c=build/%.o)
 
