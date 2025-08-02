@@ -50,7 +50,20 @@ typedef struct s_mat3
 	float	m[3][3];
 }	t_mat3;
 
-void	get_transform_matrix(void *_obj, t_mat4 *mat);
+typedef struct s_rcx
+{
+	float	rx;
+	float	ry;
+	float	rz;
+	float	sx;
+	float	sy;
+	float	sz;
+	float	cx;
+	float	cy;
+	float	cz;
+}	t_rcx;
+
+int	get_transform_matrix(void *_obj, t_mat4 *mat);
 void	mat4_mult_mat4(t_mat4 *result, t_mat4 a, t_mat4 b);
 void	mat4_mult_vec4(t_vector4 *result, t_mat4 *mat, t_vector4 vec);
 void	draw_texure_triangle(mlx_image_t *image, t_vertex vertices[3], mlx_texture_t *tex);

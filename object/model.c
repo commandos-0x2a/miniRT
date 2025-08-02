@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   model.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaltayeh <yaltayeh@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 21:24:41 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/30 20:46:40 by yaltayeh         ###   ########.fr       */
+/*   Updated: 2025/07/31 11:29:21 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void render_model(mlx_t *mlx, t_model *model, t_camera *camera)
 	unsigned int	i;
 
 	(void)mlx;
-	get_transform_matrix(model, &transtorm_matrix);
+	get_transform_matrix(model, &transtorm_matrix); // no uninitialized value error, why?
 	mat4_mult_mat4(&transtorm_matrix, transtorm_matrix, camera->matrix);
 	
 	vertices = malloc(model->vertex_count * sizeof(*vertices));
