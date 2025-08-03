@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 02:01:34 by rsrour            #+#    #+#             */
-/*   Updated: 2025/08/03 01:03:20 by rsrour           ###   ########.fr       */
+/*   Updated: 2025/08/03 10:53:43 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,17 +116,40 @@ void 	ft_get_rotation_mat(t_object *obj, t_mat4 *rotation_mat)
 	rotation_mat->m[3][3] = 1.0f;
 }
 
+void	ft_get_transition_mat(t_object *obj, t_mat4 *trans_mat)
+{
+	trans_mat->m[0][0] = 1.0f;
+	trans_mat->m[0][1] = 0.0f;
+	trans_mat->m[0][2] = 0.0f;
+	trans_mat->m[0][3] = obj->transform.position.x;
+	trans_mat->m[1][0] = 0.0f;
+	trans_mat->m[1][1] = 1.0f;
+	trans_mat->m[1][2] = 0.0f;
+	trans_mat->m[1][3] = obj->transform.position.y;
+	trans_mat->m[2][0] = 0.0f;
+	trans_mat->m[2][1] = 0.0f;
+	trans_mat->m[2][2] = 1.0f;
+	trans_mat->m[2][3] = obj->transform.position.z;
+	trans_mat->m[3][0] = 0.0f;
+	trans_mat->m[3][1] = 0.0f;
+	trans_mat->m[3][2] = 0.0f;
+	trans_mat->m[3][3] = 1.0f;
+}
+
 void	get_transform_matrix(void *_obj, t_mat4 *mat)
 {
     t_object *obj;
 	t_mat4 scale_mat;
 	t_mat4 rotation_mat;
+	t_mat4 translation_mat;
 
     obj = _obj;
 	ft_memset(&scale_mat, 0, sizeof(t_mat4));
 	ft_memset(&rotation_mat, 0, sizeof(t_mat4));
+	ft_memset(&translation_mat, 0, sizeof(t_mat4));
     ft_get_scale_mat(obj, &scale_mat);
 	ft_get_rotation_mat(obj, &rotation_mat);
+	ft_get_transition_mat(obj, &translation_mat);
     mat->m[3][0] = obj->transform.position.x; // Set translation in x
     mat->m[3][1] = obj->transform.position.y; // Set translation in y
     mat->m[3][2] = obj->transform.position.z; // Set translation in z
