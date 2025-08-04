@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 11:35:42 by rsrour            #+#    #+#             */
-/*   Updated: 2025/07/31 11:36:23 by rsrour           ###   ########.fr       */
+/*   Updated: 2025/08/03 21:57:46 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,19 @@ void mat4_mult_mat4(t_mat4 *result, t_mat4 a, t_mat4 b) // TODO: don't forget to
 
 void	mat3_mult_vec3(t_vector3 *result, t_mat3 *mat, t_vector3 vec)
 {
-	result->x = mat->m[0][0] * vec.x + mat->m[0][1] * vec.y + mat->m[0][2] * vec.z;
-	result->y = mat->m[1][0] * vec.x + mat->m[1][1] * vec.y + mat->m[1][2] * vec.z;
-	result->z = mat->m[2][0] * vec.x + mat->m[2][1] * vec.y + mat->m[2][2] * vec.z;
+	result->x = mat->m[0][0] * vec.x + mat->m[1][0] * vec.y + mat->m[2][0] * vec.z;
+	result->y = mat->m[0][1] * vec.x + mat->m[1][1] * vec.y + mat->m[2][1] * vec.z;
+	result->z = mat->m[0][2] * vec.x + mat->m[1][2] * vec.y + mat->m[2][2] * vec.z;
 }
 
 void mat4_mult_vec4(t_vector4 *result, t_mat4 *mat, t_vector4 vec)
 {
-    result->x = mat->m[0][0] * vec.x + mat->m[0][1] * vec.y + \
-			mat->m[0][2] * vec.z + mat->m[0][3] * vec.w;
-    result->y = mat->m[1][0] * vec.x + mat->m[1][1] * vec.y + \
-			mat->m[1][2] * vec.z + mat->m[1][3] * vec.w;
-    result->z = mat->m[2][0] * vec.x + mat->m[2][1] * vec.y + \
-			mat->m[2][2] * vec.z + mat->m[2][3] * vec.w;
-    result->w = mat->m[3][0] * vec.x + mat->m[3][1] * vec.y + \
-			mat->m[3][2] * vec.z + mat->m[3][3] * vec.w;
+	result->x = mat->m[0][0] * vec.x + mat->m[1][0] * vec.y + \
+			mat->m[2][0] * vec.z + mat->m[3][0] * vec.w;
+	result->y = mat->m[0][1] * vec.x + mat->m[1][1] * vec.y + \
+			mat->m[2][1] * vec.z + mat->m[3][1] * vec.w;
+	result->z = mat->m[0][2] * vec.x + mat->m[1][2] * vec.y + \
+			mat->m[2][2] * vec.z + mat->m[3][2] * vec.w;
+	result->w = mat->m[0][3] * vec.x + mat->m[1][3] * vec.y + \
+			mat->m[2][3] * vec.z + mat->m[3][3] * vec.w;
 }

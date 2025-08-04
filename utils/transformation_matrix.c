@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 02:01:34 by rsrour            #+#    #+#             */
-/*   Updated: 2025/08/03 10:53:43 by rsrour           ###   ########.fr       */
+/*   Updated: 2025/08/03 21:50:59 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,16 @@ The transformation matrix is built by applying scale, then rotation, and finally
 	| 0   0   0   1  |
 */
 
+/*
+mat.m[i][j] represents the element in the i-th column and j-th row of the matrix.
+so: m[0] is the first column, m[1] is the second column, and so on.
+| m[0][0] m[1][0] m[2][0] m[3][0] |   ← top row
+| m[0][1] m[1][1] m[2][1] m[3][1] |   ← 2nd row
+| m[0][2] m[1][2] m[2][2] m[3][2] |   ← 3rd row
+| m[0][3] m[1][3] m[2][3] m[3][3] |   ← bottom row
+
+*/
+
 void  ft_get_scale_mat(t_object *obj, t_mat4 *scale_mat)
 {
 	scale_mat->m[0][0] = obj->transform.scale.x;
@@ -99,41 +109,27 @@ void 	ft_get_rotation_mat(t_object *obj, t_mat4 *rotation_mat)
 	
 	ft_init_rcx(&rcx, obj);
 	rotation_mat->m[0][0] = rcx.cy * rcx.cz;
-	rotation_mat->m[0][1] = rcx.cz * rcx.sy * rcx.sx - rcx.sz * rcx.cx;
-	rotation_mat->m[0][2] = rcx.cz * rcx.sy * rcx.cx + rcx.sz * rcx.sx;
-	rotation_mat->m[0][3] = 0.0f;
 	rotation_mat->m[1][0] = rcx.sz * rcx.cy;
-	rotation_mat->m[1][1] = rcx.sz * rcx.sy * rcx.sx + rcx.cz * rcx.cx;
-	rotation_mat->m[1][2] = rcx.sz * rcx.sy * rcx.cx - rcx.cz * rcx.sx;
-	rotation_mat->m[1][3] = 0.0f;
 	rotation_mat->m[2][0] = -rcx.sy;
+	rotation_mat->m[0][1] = rcx.cz * rcx.sy * rcx.sx - rcx.sz * rcx.cx;
+	rotation_mat->m[1][1] = rcx.sz * rcx.sy * rcx.sx + rcx.cz * rcx.cx;
 	rotation_mat->m[2][1] = rcx.cy * rcx.sx;
+	rotation_mat->m[0][2] = rcx.cz * rcx.sy * rcx.cx + rcx.sz * rcx.sx;
+	rotation_mat->m[1][2] = rcx.sz * rcx.sy * rcx.cx - rcx.cz * rcx.sx;
 	rotation_mat->m[2][2] = rcx.cy * rcx.cx;
-	rotation_mat->m[2][3] = 0.0f;
-	rotation_mat->m[3][0] = 0.0f;
-	rotation_mat->m[3][1] = 0.0f;
-	rotation_mat->m[3][2] = 0.0f;
 	rotation_mat->m[3][3] = 1.0f;
 }
 
 void	ft_get_transition_mat(t_object *obj, t_mat4 *trans_mat)
 {
+	ft_bzero(trans_mat, sizeof(t_mat4));
 	trans_mat->m[0][0] = 1.0f;
-	trans_mat->m[0][1] = 0.0f;
-	trans_mat->m[0][2] = 0.0f;
-	trans_mat->m[0][3] = obj->transform.position.x;
-	trans_mat->m[1][0] = 0.0f;
 	trans_mat->m[1][1] = 1.0f;
-	trans_mat->m[1][2] = 0.0f;
-	trans_mat->m[1][3] = obj->transform.position.y;
-	trans_mat->m[2][0] = 0.0f;
-	trans_mat->m[2][1] = 0.0f;
-	trans_mat->m[2][2] = 1.0f;
-	trans_mat->m[2][3] = obj->transform.position.z;
-	trans_mat->m[3][0] = 0.0f;
-	trans_mat->m[3][1] = 0.0f;
-	trans_mat->m[3][2] = 0.0f;
+	trans_mat->m[2][2] = 1.0f; 
 	trans_mat->m[3][3] = 1.0f;
+	trans_mat->m[3][0] = obj->transform.position.x; // Set translation
+	trans_mat->m[3][1] = obj->transform.position.y; // Set translation
+	trans_mat->m[3][2] = obj->transform.position.z; // Set translation
 }
 
 void	get_transform_matrix(void *_obj, t_mat4 *mat)
