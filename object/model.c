@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 21:24:41 by yaltayeh          #+#    #+#             */
-/*   Updated: 2025/07/31 11:29:21 by rsrour           ###   ########.fr       */
+/*   Updated: 2025/08/05 11:55:49 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void render_model(mlx_t *mlx, t_model *model, t_camera *camera)
 
 	(void)mlx;
 	get_transform_matrix(model, &transtorm_matrix); // no uninitialized value error, why?
-	mat4_mult_mat4(&transtorm_matrix, transtorm_matrix, camera->matrix);
+	mat4_mult_mat4(&transtorm_matrix, &transtorm_matrix, &camera->matrix);
 	
 	vertices = malloc(model->vertex_count * sizeof(*vertices));
 	if (!vertices)

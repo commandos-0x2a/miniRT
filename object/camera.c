@@ -23,7 +23,7 @@ void	update_camera_matrix(t_camera *camera)
 		projection(camera, &proj_mat);
 	get_transform_matrix(camera, &transform_mat);
 
-	mat4_mult_mat4(&camera->matrix, proj_mat, transform_mat);
+	mat4_mult_mat4(&camera->matrix, &proj_mat, &transform_mat);
 	// TODO: multi proj_mat * transform_mat
 	// set result to camera matrix
 }
