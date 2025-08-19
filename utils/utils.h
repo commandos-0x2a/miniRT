@@ -40,7 +40,7 @@ typedef struct	s_transform
 	t_vector3	scale;
 }	t_transform;
 
-typedef struct s_mat4
+typedef struct s_mat8
 {
   float m[8][8];
 } t_mat8;
