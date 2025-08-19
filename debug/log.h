@@ -14,6 +14,7 @@
 #define LOG_H
 
 #include <ft_printf.h>
+#include <cube.h>
 
 #ifndef DEBUG_FD
 #define DEBUG_FD 2
@@ -36,5 +37,6 @@
 # endif
 
 void	log_msg(const char *format, ...);
+void    ft_cube_info(t_cube *cube);
 
 #endif // LOG_H

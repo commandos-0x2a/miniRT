@@ -21,7 +21,7 @@ void	update_camera_matrix(t_camera *camera)
 	projection = camera->projection;
 	if (projection)
 		projection(camera, &proj_mat);
-	get_transform_matrix(camera, &transform_mat);
+	get_transform_matrix(camera, &transform_mat);//the source of the problem
 
 	mat4_mult_mat4(&camera->matrix, &proj_mat, &transform_mat);
 	// TODO: multi proj_mat * transform_mat

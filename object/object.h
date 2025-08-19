@@ -25,6 +25,7 @@ typedef struct	s_object
 	uint8_t		is_name_set;
 	t_transform	transform;
 	void		(*render)();
+  void            (*obj_info)();
 }	t_object;
 
 void	render_object(mlx_t *mlx, void *_obj, void *camera);

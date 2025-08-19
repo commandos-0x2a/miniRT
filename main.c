@@ -1,8 +1,3 @@
-// -----------------------------------------------------------------------------
-// Codam Coding College, Amsterdam @ 2022-2023 by W2Wizard.
-// See README in the root project for more information.
-// -----------------------------------------------------------------------------
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -72,7 +67,7 @@ void key_hook(mlx_key_data_t keydata, void *param)
 int32_t main(void)
 {
 	t_game			*game;
-	mlx_texture_t	*tex;
+	//mlx_texture_t	*tex;
 
 	LOG_DEBUG("start");
 	game = ft_calloc(1, sizeof(*game));
@@ -83,19 +78,20 @@ int32_t main(void)
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	tex = mlx_load_png("uv_cube.png");
-	if (!tex)
-		destroy_game(game);
-
+	//Tex- = mlx_load_png("uv_cube.png");
+	//if (!tex)
+	//	destroy_game(game);
 	game->cube = init_cube(NULL);
 	if (!game->cube)
 		destroy_game(game);
+	ft_cube_info(game->cube);
 	game->camera = init_camera(game->mlx, 45.0f, WIDTH, HEIGHT);
+	ft_cube_info(game->cube);
 	if (!game->camera)
 		destroy_game(game);
 
 	mlx_loop_hook(game->mlx, ft_draw, game);
-	mlx_key_hook(game->mlx, key_hook, game);
+	//mlx_key_hook(game->mlx, key_hook, game);
 
 	mlx_loop(game->mlx);
 	

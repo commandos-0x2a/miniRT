@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "cube.h"
 #include <stdlib.h>
 #include <libft.h>
+#include <log.h>
 
 static void set_vertices(t_vertex *vertices)
 {
@@ -45,12 +45,13 @@ t_cube *init_cube(mlx_texture_t *texture)
 	t_cube 		*cube;
 	static int	id;
 
+	LOG_DEBUG("init cube");
 	cube = ft_calloc(1, sizeof(*cube));
 	if (!cube)
 		return (NULL);
 	set_object_name(cube, "cube", &id);
 	model_constructor(cube);
-	cube->model.obj.transform.position = (t_vector3){0.f, 0.f, -500.f};
+	cube->model.obj.transform.position = (t_vector3){0.f, 0.f, -5.f};
 	cube->model.obj.transform.rotation = (t_vector3){0.f, 0.f, 0.f};
 	cube->model.obj.transform.scale = (t_vector3){100.f, 100.f, 100.f};
 	cube->model.texture = texture;

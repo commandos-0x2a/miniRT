@@ -39,4 +39,5 @@ else
 CPPFLAGS += -D'LOG_FATAL(...)=;'
 endif
 
-SRC += debug/log.c
+SRC += debug/log.c \
+	debug/obj_info.c

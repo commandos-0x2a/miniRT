@@ -42,6 +42,11 @@ typedef struct	s_transform
 
 typedef struct s_mat4
 {
+  float m[8][8];
+} t_mat8;
+
+typedef struct s_mat4
+{
 	float m[4][4];
 }	t_mat4;
 
