@@ -23,6 +23,7 @@ SRC += main.c							\
 	utils/drawing.c						\
 	utils/matrix_multiplication.c		\
 	utils/transformation_matrix.c		\
+	utils/matrix_inverse.c			\
 	projection/perspective_projection.c	\
 
 TEST_SRC = test_barycentric.c

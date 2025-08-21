@@ -40,11 +40,6 @@ typedef struct	s_transform
 	t_vector3	scale;
 }	t_transform;
 
-typedef struct s_mat8
-{
-  float m[8][8];
-} t_mat8;
-
 typedef struct s_mat4
 {
 	float m[4][4];
@@ -71,6 +66,7 @@ typedef struct s_rcx
 void	get_transform_matrix(void *_obj, t_mat4 *mat);
 void	mat4_mult_mat4(t_mat4 *result, t_mat4 *a, t_mat4 *b);
 void	mat4_mult_vec4(t_vector4 *result, t_mat4 *mat, t_vector4 vec);
+float ft_det_mat4(t_mat4 *m);
 void	draw_texure_triangle(mlx_image_t *image, t_vertex vertices[3], mlx_texture_t *tex);
 
 #endif // UTILS_H
