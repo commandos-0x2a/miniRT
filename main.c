@@ -67,22 +67,22 @@ void key_hook(mlx_key_data_t keydata, void *param)
 
 void new_mat(t_mat4 *m) //for testing 
 {
-  m->m[0][0] = 1;
-  m->m[0][1] = 1;
-  m->m[0][2] = 1;
-  m->m[0][3] = 1;
-  m->m[1][0] = 1;
-  m->m[1][1] = 2;
-  m->m[1][2] = 3;
-  m->m[1][3] = 4;
-  m->m[2][0] = 1;
-  m->m[2][1] = 3;
-  m->m[2][2] = 6;
-  m->m[2][3] = 10;
-  m->m[3][0] = 1;
-  m->m[3][1] = 4;
-  m->m[3][2] = 10;
-  m->m[3][3] = 20;
+  m->m[0][0] = 1.4;
+  m->m[0][1] = 6.4;
+  m->m[0][2] = 9.1;
+  m->m[0][3] = 0;
+  m->m[1][0] = 3.2;
+  m->m[1][1] = 2.1;
+  m->m[1][2] = 3.6;
+  m->m[1][3] = 0;
+  m->m[2][0] = -1.8;
+  m->m[2][1] = 0.3;
+  m->m[2][2] = 0.1;
+  m->m[2][3] = 0;
+  m->m[3][0] = 5.4;
+  m->m[3][1] = -0.2;
+  m->m[3][2] = -0.5;
+  m->m[3][3] = 1.0;
 }
 
 int32_t main(void)
@@ -90,16 +90,19 @@ int32_t main(void)
 	t_game			*game;
 	mlx_texture_t	*tex;
 	t_mat4   m; //testing
-	float det; //testing
+	t_mat4	adj;//testing
 
 	LOG_DEBUG("start");
 	game = ft_calloc(1, sizeof(*game));
 	ft_memset(&m, 0, sizeof(m)); //testing
+	ft_memset(&adj, 0, sizeof(adj));
 	LOG_INFO("init m\n");//testing
 	new_mat(&m);//testing
-	LOG_INFO("m[2][3] = %f\n", m.m[2][3]); //testing
-	det = ft_det_mat4(&m); //testing
-	LOG_INFO("det of m = %f", det); //testing
+	LOG_DEBUG("original mat:\n");
+	ft_viz_mat4(m);
+	ft_adjugate_mat4(&adj, &m);
+	LOG_DEBUG("adjugate mat:\n");
+	ft_viz_mat4(adj);
 	// Gotta error check this stuff
 	if (!(game->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{
@@ -117,7 +120,7 @@ int32_t main(void)
 		destroy_game(game);
 	mlx_loop_hook(game->mlx, ft_draw, game);
         mlx_key_hook(game->mlx, key_hook, game);
-	mlx_loop(game->mlx);
+		//mlx_loop(game->mlx);
 	
 	destroy_game(game);
 	return (EXIT_SUCCESS);
