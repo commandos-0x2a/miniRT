@@ -14,6 +14,7 @@
 # define CAMERA_H
 
 #include "object.h"
+#include "matrix.h"
 
 // we either use one attribute for the camera's rotation and orientation,
 // Use a single orientation attribute (e.g., quaternion or rotation matrix). 

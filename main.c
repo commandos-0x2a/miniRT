@@ -4,6 +4,7 @@
 #include "components.h"
 #include <MLX42/MLX42.h>
 #include "log.h"
+#include "matrix.h"
 
 #define WIDTH 1000
 #define HEIGHT 800

@@ -2,7 +2,7 @@ NAME = miniRT
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
-CPPFLAGS = -IMLX42/include -Iobject -Ilibft/include -Icomponents -Iutils -Iprojection -Idebug
+CPPFLAGS = -IMLX42/include -Iobject -Ilibft/include -Icomponents -Iutils -Iprojection -Idebug -Imatrix
 LDFLAGS =  -lmlx42 -lglfw -lm -Lbuild -Llibft -lft # -fsanitize=address
 
 include debug/log.mk
@@ -21,9 +21,9 @@ SRC += main.c							\
 	object/model.c						\
 	object/camera.c						\
 	utils/drawing.c						\
-	utils/matrix_multiplication.c		\
-	utils/transformation_matrix.c		\
-	utils/matrix_inverse.c			\
+	matrix/matrix_multiplication.c		\
+	matrix/transformation_matrix.c		\
+	matrix/matrix_inverse.c			\
 	projection/perspective_projection.c	\
 
 TEST_SRC = test_barycentric.c

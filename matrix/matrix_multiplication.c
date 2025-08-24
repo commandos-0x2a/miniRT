@@ -15,6 +15,7 @@
 #include <libft.h>
 #include <stdio.h>
 #include "log.h"
+#include "matrix.h"
 
 /*
 DOT product of two 4x4 matrices

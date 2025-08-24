@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "log.h"
+#include "matrix.h"
 
 //ALL OUR WORK WILL BE COLUMN MAJOR to follow OPENGL conventions
 /*

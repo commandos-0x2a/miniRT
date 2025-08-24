@@ -2,6 +2,7 @@
 #include <libft.h>
 #include <log.h>
 #include <stdio.h>
+#include "matrix.h"
 
 float ft_det_mat4(t_mat4 *m)
 {
@@ -27,9 +28,9 @@ float ft_det_mat4(t_mat4 *m)
   A_{ij} is the adjugate element of the adjugate matrix
   A_{ij} = (-1)^{ij} * det(M_{ij}) 
  */
-void ft_adjugate_mat(t_mat4 *adj, t_mat4 m)
+void ft_adjugate_mat4(t_mat4 *adj, t_mat4 *m)
 {
-  	adj->m[0][0] = m->m[1][1] * m->m[2][2] * m->m[3][3] + m->m[1][2] * m->m[2][3] * m->m[3][1] + m->m[1][3] * m->m[2][1] * m->m[3][2]
+	adj->m[0][0] = m->m[1][1] * m->m[2][2] * m->m[3][3] + m->m[1][2] * m->m[2][3] * m->m[3][1] + m->m[1][3] * m->m[2][1] * m->m[3][2]
 		- m->m[1][1] * m->m[2][3] * m->m[3][2] - m->m[1][2] * m->m[2][1] * m->m[3][3] - m->m[1][3] * m->m[2][2] * m->m[3][1];
 	adj->m[0][1] = - m->m[1][0] * m->m[2][2] * m->m[3][3] - m->m[1][2] * m->m[2][3] * m->m[3][0] - m->m[1][3] * m->m[2][0] * m->m[3][1]
 		+ m->m[1][0] * m->m[2][3] * m->m[3][2] + m->m[1][2] * m->m[2][0] * m->m[3][3] + m->m[1][3] * m->m[2][2] * m->m[3][0];
