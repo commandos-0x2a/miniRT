@@ -90,19 +90,19 @@ int32_t main(void)
 	t_game			*game;
 	mlx_texture_t	*tex;
 	t_mat4   m; //testing
-	t_mat4	adj;//testing
+	t_mat4	inv;//testing
 
 	LOG_DEBUG("start");
 	game = ft_calloc(1, sizeof(*game));
 	ft_memset(&m, 0, sizeof(m)); //testing
-	ft_memset(&adj, 0, sizeof(adj));
+	ft_memset(&inv, 0, sizeof(adj));//testing
 	LOG_INFO("init m\n");//testing
 	new_mat(&m);//testing
 	LOG_DEBUG("original mat:\n");
 	ft_viz_mat4(m);
-	ft_adjugate_mat4(&adj, &m);
-	LOG_DEBUG("adjugate mat:\n");
-	ft_viz_mat4(adj);
+	ft_inverse_mat4(&inv, &m);
+	LOG_DEBUG("inverse mat:\n");
+	ft_viz_mat4(inv);
 	// Gotta error check this stuff
 	if (!(game->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{
