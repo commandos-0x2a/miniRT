@@ -14,6 +14,7 @@
 #include "camera.h"
 #include <math.h>
 #include "drawing.h"
+#include "libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -32,13 +33,15 @@ static t_vector4 vertex_2_vertor4(t_vertex ver)
 static void render_model(mlx_t *mlx, t_model *model, t_camera *camera)
 {
 	t_mat4			transtorm_matrix;
+	t_mat4			temp_matrix;
 	t_vertex		*vertices;
 	t_vector4		vec;
 	unsigned int	i;
 
 	(void)mlx;
-	get_transform_matrix(model, &transtorm_matrix);
-	mat4_mult_mat4(&transtorm_matrix, &transtorm_matrix, &camera->matrix);
+	ft_memset(&temp_matrix, 0, sizeof(temp_matrix));
+	get_transform_matrix(model, &temp_matrix);
+	mat4_mult_mat4(&transtorm_matrix, &temp_matrix, &camera->matrix);
 	vertices = malloc(model->vertex_count * sizeof(*vertices));
 	if (!vertices)
 		return ;

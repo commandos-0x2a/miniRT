@@ -13,17 +13,19 @@ void	update_camera_matrix(t_camera *camera)
 {
 	void	(*projection)(t_camera *, t_mat4 *);
 	t_mat4	proj_mat;
+	t_mat4	view_mat;
 	t_mat4	transform_mat;
 
-	memset(&camera->matrix, 0, sizeof(camera->matrix));
-	memset(&proj_mat, 0, sizeof(proj_mat));
-	memset(&transform_mat, 0, sizeof(transform_mat));
+	ft_memset(&camera->matrix, 0, sizeof(camera->matrix));
+	ft_memset(&proj_mat, 0, sizeof(proj_mat));
+	ft_memset(&view_mat, 0, sizeof(view_mat));
+	ft_memset(&transform_mat, 0, sizeof(transform_mat));
 	projection = camera->projection;
 	if (projection)
 		projection(camera, &proj_mat);
 	get_transform_matrix(camera, &transform_mat);//the source of the problem
-
-	mat4_mult_mat4(&camera->matrix, &proj_mat, &transform_mat);
+	ft_inverse_mat4(&view_mat, &transform_mat);
+	mat4_mult_mat4(&camera->matrix, &proj_mat, &view_mat);
 	// TODO: multi proj_mat * transform_mat
 	// set result to camera matrix
 }

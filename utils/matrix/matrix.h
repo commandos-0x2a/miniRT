@@ -33,6 +33,6 @@ void	mat4_mult_vec4(t_vector4 *result, t_mat4 *mat, t_vector4 vec);
 float	ft_det_mat4(t_mat4 *m);
 void	ft_adjugate_mat4(t_mat4 *adj, t_mat4 *m);
 void	ft_viz_mat4(t_mat4 m);
-void	ft_inverse_mat4(t_mat4 *result, t_mat4 *m)
+void	ft_inverse_mat4(t_mat4 *result, t_mat4 *m);
 
 #endif

@@ -146,8 +146,18 @@ void	get_transform_matrix(void *_obj, t_mat4 *mat)
 	ft_memset(&rotation_mat, 0, sizeof(t_mat4));
 	ft_memset(&translation_mat, 0, sizeof(t_mat4));
     ft_get_scale_mat(obj, &scale_mat);
+	printf("scale mat:\n");
+	ft_viz_mat4(scale_mat);
 	ft_get_rotation_mat(obj, &rotation_mat);
+	printf("rotation_mat:\n");
+	ft_viz_mat4(rotation_mat);
 	ft_get_transition_mat(obj, &translation_mat);
+	printf("translation_mat:\n");
+	ft_viz_mat4(translation_mat);
 	mat4_mult_mat4(&temp_mat, &rotation_mat, &scale_mat);
-	mat4_mult_mat4(mat, &translation_mat, &temp_mat);
+	printf("temp matrix:\n");
+	ft_viz_mat4(temp_mat);
+	mat4_mult_mat4(mat, &temp_mat, &translation_mat);
+	printf("%s transform matrix:\n", obj->name);
+	ft_viz_mat4(*mat);
 }

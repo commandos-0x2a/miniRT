@@ -65,6 +65,7 @@ void key_hook(mlx_key_data_t keydata, void *param)
 	// 	player->transform.position.z);
 }
 
+/*
 void new_mat(t_mat4 *m) //for testing 
 {
   m->m[0][0] = 1.4;
@@ -84,25 +85,15 @@ void new_mat(t_mat4 *m) //for testing
   m->m[3][2] = -0.5;
   m->m[3][3] = 1.0;
 }
+*/
 
 int32_t main(void)
 {
 	t_game			*game;
 	mlx_texture_t	*tex;
-	t_mat4   m; //testing
-	t_mat4	inv;//testing
 
 	LOG_DEBUG("start");
 	game = ft_calloc(1, sizeof(*game));
-	ft_memset(&m, 0, sizeof(m)); //testing
-	ft_memset(&inv, 0, sizeof(adj));//testing
-	LOG_INFO("init m\n");//testing
-	new_mat(&m);//testing
-	LOG_DEBUG("original mat:\n");
-	ft_viz_mat4(m);
-	ft_inverse_mat4(&inv, &m);
-	LOG_DEBUG("inverse mat:\n");
-	ft_viz_mat4(inv);
 	// Gotta error check this stuff
 	if (!(game->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{
@@ -120,7 +111,7 @@ int32_t main(void)
 		destroy_game(game);
 	mlx_loop_hook(game->mlx, ft_draw, game);
         mlx_key_hook(game->mlx, key_hook, game);
-		//mlx_loop(game->mlx);
+	mlx_loop(game->mlx);
 	
 	destroy_game(game);
 	return (EXIT_SUCCESS);
