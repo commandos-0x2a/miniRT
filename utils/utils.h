@@ -2,7 +2,7 @@
 #define UTILS_H
 
 #include <MLX42/MLX42.h>
-//#include "matrix.h"
+#include "matrix.h"
 
 typedef struct s_vertex
 {
@@ -12,27 +12,6 @@ typedef struct s_vertex
 	float	u;
 	float	v;
 }	t_vertex;
-
-typedef struct	s_vector4
-{
-	float	x;
-	float	y;
-	float	z;
-	float	w;
-}	t_vector4;
-
-typedef struct	s_vector3
-{
-	float	x;
-	float	y;
-	float	z;
-}	t_vector3;
-
-typedef struct s_vector2
-{
-	float	x;
-	float	y;
-}	t_vector2;
 
 typedef struct	s_transform
 {

@@ -5,6 +5,7 @@
 #include <MLX42/MLX42.h>
 #include "log.h"
 #include "matrix.h"
+#include "test.h" //test
 
 #define WIDTH 1000
 #define HEIGHT 800
@@ -64,36 +65,31 @@ void key_hook(mlx_key_data_t keydata, void *param)
 	// 	player->transform.position.y,
 	// 	player->transform.position.z);
 }
-
-/*
-void new_mat(t_mat4 *m) //for testing 
-{
-  m->m[0][0] = 1.4;
-  m->m[0][1] = 6.4;
-  m->m[0][2] = 9.1;
-  m->m[0][3] = 0;
-  m->m[1][0] = 3.2;
-  m->m[1][1] = 2.1;
-  m->m[1][2] = 3.6;
-  m->m[1][3] = 0;
-  m->m[2][0] = -1.8;
-  m->m[2][1] = 0.3;
-  m->m[2][2] = 0.1;
-  m->m[2][3] = 0;
-  m->m[3][0] = 5.4;
-  m->m[3][1] = -0.2;
-  m->m[3][2] = -0.5;
-  m->m[3][3] = 1.0;
-}
-*/
-
+ 
 int32_t main(void)
 {
 	t_game			*game;
 	mlx_texture_t	*tex;
+	t_mat4			m;
+	t_vector4		v;
+	t_vector4			res;
 
 	LOG_DEBUG("start");
 	game = ft_calloc(1, sizeof(*game));
+	//testing
+	ft_memset(&m, 0, sizeof(m));
+	ft_memset(&v, 0, sizeof(v));
+	ft_memset(&res, 0, sizeof(res));
+	new_mat(&m);
+	new_vec4(&v);
+	mat4_mult_vec4(&res, &m, v);
+	LOG_INFO("m:\n");
+	ft_viz_mat4(m);
+	LOG_INFO("v:\n");
+	ft_viz_vec4(v);
+	LOG_INFO("res:\n");
+	ft_viz_vec4(res);
+	//end tesing
 	// Gotta error check this stuff
 	if (!(game->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{
@@ -111,7 +107,7 @@ int32_t main(void)
 		destroy_game(game);
 	mlx_loop_hook(game->mlx, ft_draw, game);
         mlx_key_hook(game->mlx, key_hook, game);
-	mlx_loop(game->mlx);
+		//	mlx_one_loop(game->mlx);
 	
 	destroy_game(game);
 	return (EXIT_SUCCESS);
