@@ -15,18 +15,7 @@ else ifeq ($(UNAME_S), Darwin)
 	CPPFLAGS += -I"/opt/homebrew/Cellar/glfw/3.4/include"
 endif
 
-SRC += main.c							\
-	components/cube.c					\
-	object/object.c						\
-	object/model.c						\
-	object/camera.c						\
-	utils/drawing.c						\
-	utils/matrix/matrix_multiplication.c		\
-	utils/matrix/transformation_matrix.c		\
-	utils/matrix/matrix_inverse.c				\
-	utils/matrix/visualize_matrix.c			\
-	projection/perspective_projection.c	\
-	test.c
+SRC += main.c
 
 TEST_SRC = test_barycentric.c
 TEST_OBJ = $(TEST_SRC:%.c=build/%.o)
